@@ -7,8 +7,14 @@
 // https://medium.com/@nate_wang/a-new-approach-for-managing-redux-actions-91c26ce8b5da.
 
 import initialState from './initialState';
+import { reducer as openMessageBoxReducer } from './openMessageBox';
+import { reducer as closeMessageBoxReducer } from './closeMessageBox';
+import { reducer as showMessageBoxReducer } from './showMessageBox';
 
 const reducers = [
+  openMessageBoxReducer,
+  closeMessageBoxReducer,
+  showMessageBoxReducer,
 ];
 
 export default function reducer(state = initialState, action) {
