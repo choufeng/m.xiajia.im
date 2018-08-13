@@ -42,7 +42,7 @@ export class LoginBox extends Component {
     })
     console.log('doLogin')
     setTimeout(() => {
-      this.props.commonActions.showMessageBox('login successful', 'positive')
+      this.props.commonActions.showMessageBox('login successful', 'success')
       this.setState({
         btnStatus: false
       })
