@@ -22,7 +22,6 @@ export class LoginBox extends Component {
     this.inputUsername = this.inputUsername.bind(this)
     this.inputPassword = this.inputPassword.bind(this)
     this.getVersion = this.getVersion.bind(this)
-    this.doClose = this.doClose.bind(this)
   }
   static propTypes = {
     home: PropTypes.object.isRequired,
@@ -76,10 +75,6 @@ export class LoginBox extends Component {
     })
   }
 
-  doClose () {
-    this.props.commonActions.closeMessageBox()
-  }
-
   componentDidMount () {
     this.getVersion()
   }
@@ -97,14 +92,13 @@ export class LoginBox extends Component {
           </Grid>
           <Grid item xs={12}>
             <Button variant="outlined" color="inherit" className="hlb-button" onClick={this.doLogin} disabled={this.state.btnStatus}> Login </Button>
-            <Button variant="outlined" color="inherit" className="hlb-button" onClick={this.doClose}> Close </Button>
           </Grid>
           <Grid item xs={12}>
             {this.state.btnStatus && <LinearProgress className="hlb-input" />}
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             Version: {this.state.version}
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
     );

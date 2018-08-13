@@ -22,7 +22,9 @@ describe('common/redux/openMessageBox', () => {
     expect(state).not.toBe(prevState);
 
     // TODO: use real case expected value instead of {}.
-    const expectedState = {};
+    const expectedState = {
+      messageOpenStatus: true
+    };
     expect(state).toEqual(expectedState);
   });
 });
