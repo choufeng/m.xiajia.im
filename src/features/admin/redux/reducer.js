@@ -7,12 +7,8 @@
 // https://medium.com/@nate_wang/a-new-approach-for-managing-redux-actions-91c26ce8b5da.
 
 import initialState from './initialState';
-import { reducer as closeMessageBoxReducer } from './closeMessageBox';
-import { reducer as showMessageBoxReducer } from './showMessageBox';
 
 const reducers = [
-  closeMessageBoxReducer,
-  showMessageBoxReducer,
 ];
 
 export default function reducer(state = initialState, action) {
@@ -23,6 +19,5 @@ export default function reducer(state = initialState, action) {
       newState = state;
       break;
   }
-  /* istanbul ignore next */
   return reducers.reduce((s, r) => r(s, action), newState);
 }

@@ -1,0 +1,32 @@
+@import '../../styles/mixins';
+
+.admin-side-panel {
+  margin-top: 6vh;
+  .admin-side-panel-item {
+    text-align: right;
+    .admin-side-panel-item-text {
+      color: #ffffff;
+    }
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      text-align: right;
+      padding-right: 1rem;
+      background: #661A1A;
+      height: 3rem;
+      line-height: 3rem;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    li:last-child {
+      background: #f7f7f7;
+      color: #000;
+    }
+    li:hover {
+      background: #C62828;
+    }
+  }
+}

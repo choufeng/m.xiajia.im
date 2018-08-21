@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import {TextField, Grid, Button, FormHelperText, LinearProgress} from '@material-ui/core'
@@ -26,7 +27,6 @@ export class LoginBox extends Component {
   static propTypes = {
     home: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
-    commonActions: PropTypes.object.isRequired,
   };
   
   doLogin () {
@@ -45,6 +45,7 @@ export class LoginBox extends Component {
       this.setState({
         btnStatus: false
       })
+      this.props.history.push('/admin')
     }, 2000)
   }
   inputUsername (e) {
@@ -123,4 +124,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginBox);
+)(withRouter(LoginBox));
