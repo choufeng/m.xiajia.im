@@ -7,8 +7,10 @@
 // https://medium.com/@nate_wang/a-new-approach-for-managing-redux-actions-91c26ce8b5da.
 
 import initialState from './initialState';
+import { reducer as setSideMenuReducer } from './setSideMenu';
 
 const reducers = [
+  setSideMenuReducer,
 ];
 
 export default function reducer(state = initialState, action) {

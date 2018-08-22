@@ -14,7 +14,7 @@ export class TopPanel extends Component {
   render() {
     return (
       <div className="admin-top-panel">
-        <Grid container spacing={12}>
+        <Grid container spacing={16}>
           <Grid item xs={4} className="admin-top-panel-title"><h2>Hello World</h2></Grid>
           <Grid item xs={6} className="admin-top-panel-menu">Fundiid</Grid>
           <Grid item xs={2} className="admin-top-panel-right">Good</Grid>

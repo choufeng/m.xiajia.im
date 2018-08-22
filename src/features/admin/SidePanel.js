@@ -13,29 +13,23 @@ export class SidePanel extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      list: [
-        {id: 1, value: 'Home', secondary: 'show me some news'},
-        {id: 2, value: '用户管理', secondary: '这是一个简单的介绍'},
-        {id: 3, value: 'Admin', secondary: 'show me some news'},
-        {id: 4, value: 'Permissions', secondary: '这是一个简单的介绍'},
-        {id: 5, value: 'Logout', secondary: 'show me some news'},
-      ]
-    }
+    this.state = []
+  }
+
+  componentDidMount() {
+    this.props.actions.setSideMenu()
   }
 
   render() {
+    const {sideMenu} = this.props.admin
     return (
       <div className="admin-side-panel">
-        {/* <ul>
-          {this.state.list.map((i)=> {return <li>{i.value}</li>}) }
-        </ul> */}
         <Paper>
           <MenuList>
-            {this.state.list.map((i) => {
+            {sideMenu.map((i) => {
               return (
-                <MenuItem className='admin-side-panel-item'>
-                  <ListItemText className='admin-side-panel-item-text' inset primary={i.value} secondary={i.secondary} />
+                <MenuItem className='admin-side-panel-item' key={i.id}>
+                  <ListItemText className='admin-side-panel-item-text' inset primary={i.title} secondary={i.description} />
                 </MenuItem>
               )
             })}
