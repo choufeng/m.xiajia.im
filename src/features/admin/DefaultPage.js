@@ -9,7 +9,9 @@ export class DefaultPage extends Component {
     admin: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
-
+  componentDidMount () {
+    this.props.actions.setSideSelected('Dashboard')
+  }
   render() {
     return (
       <div className="admin-default-page">

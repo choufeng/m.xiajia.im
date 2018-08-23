@@ -12,6 +12,9 @@ export class Layout extends Component {
     actions: PropTypes.object.isRequired,
   };
 
+  componentDidMount() {
+  }
+
   render() {
     return (
       <div className="admin-layout">

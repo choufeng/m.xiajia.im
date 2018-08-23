@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-import {MenuItem, MenuList, Paper, ListItemText} from '@material-ui/core'
+import classNames from 'classnames'
+import {Link} from 'react-router-dom'
 
 export class SidePanel extends Component {
   static propTypes = {
@@ -14,27 +15,32 @@ export class SidePanel extends Component {
   constructor(props) {
     super(props)
     this.state = []
+    this.isActive = this.isActive.bind(this)
   }
 
   componentDidMount() {
     this.props.actions.setSideMenu()
   }
 
+  isActive (t) {
+    return this.props.admin.sideSelected === t
+  }
+
   render() {
     const {sideMenu} = this.props.admin
     return (
       <div className="admin-side-panel">
-        <Paper>
-          <MenuList>
-            {sideMenu.map((i) => {
-              return (
-                <MenuItem className='admin-side-panel-item' key={i.id}>
-                  <ListItemText className='admin-side-panel-item-text' inset primary={i.title} secondary={i.description} />
-                </MenuItem>
-              )
-            })}
-          </MenuList>
-        </Paper>
+          <ul>
+            {
+              sideMenu.map(i => {
+                return (
+                  <li className={classNames('admin-side-panel-item', {'admin-side-panel-item-active': this.isActive(i.title)})} key={i.id}>
+                    <Link to={i.uri}>{i.title}</Link>
+                  </li>
+                )
+              })
+            }
+          </ul>
       </div>
     );
   }

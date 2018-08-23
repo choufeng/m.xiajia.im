@@ -31,7 +31,7 @@ export class LoginBox extends Component {
   
   doLogin () {
     this.setState({show: true})
-    api.get('Users/login').then(res => {
+    api.get(`Users/login`).then(res => {
       console.log(res)
     }).catch(e => {
       console.log(e)

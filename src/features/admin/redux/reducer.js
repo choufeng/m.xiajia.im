@@ -8,9 +8,11 @@
 
 import initialState from './initialState';
 import { reducer as setSideMenuReducer } from './setSideMenu';
+import { reducer as setSideSelectedReducer } from './setSideSelected';
 
 const reducers = [
   setSideMenuReducer,
+  setSideSelectedReducer,
 ];
 
 export default function reducer(state = initialState, action) {

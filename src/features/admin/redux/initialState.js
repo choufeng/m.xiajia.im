@@ -8,7 +8,8 @@
 const initialState = {
   sideMenu: [],
   setSideMenuPending: false,
-  setSideMenuError: null
+  setSideMenuError: null,
+  sideSelected: ''
 };
 
 export default initialState;

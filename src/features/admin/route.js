@@ -3,7 +3,8 @@
 
 import {
   DefaultPage,
-  Layout
+  Layout,
+  Permission,
 } from './';
 
 export default {
@@ -12,5 +13,6 @@ export default {
   component: Layout,
   childRoutes: [
     { path: 'default-page', name: 'Default page', component: DefaultPage, isIndex: true },
+    { path: 'permission', name: 'Permission', component: Permission },
   ],
 };

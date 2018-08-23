@@ -22,7 +22,8 @@ export function setSideMenu(args = {}) {
       // doRequest is a placeholder Promise. You should replace it with your own logic.
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
-      const doRequest = axios.get('http://ide.xiajia.im:3000/api/menus')
+      let d = JSON.stringify({order: 'sortby'})
+      const doRequest = axios.get(`http://ide.xiajia.im:3000/api/menus?filter=${d}`)
       // const doRequest = args.error ? Promise.reject(new Error()) : Promise.resolve();
       doRequest.then(
         (res) => {
