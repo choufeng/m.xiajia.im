@@ -32,7 +32,7 @@ export class TopPanel extends Component {
           <Grid item xs={4} className="admin-top-panel-title"><h3>{this.props.admin.sideSelected}</h3></Grid>
           <Grid item xs={6} className="admin-top-panel-menu"></Grid>
           <Grid item xs={2} className="admin-top-panel-right">
-            <Button variant="none" aria-owns="simple-menu" aria-haspopup="true" onClick={this.handleClickUserMenu}>超级管理员</Button>
+            <Button variant="flat" aria-owns="simple-menu" aria-haspopup="true" onClick={this.handleClickUserMenu}>超级管理员</Button>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}

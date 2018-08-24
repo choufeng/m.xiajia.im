@@ -6,3 +6,4 @@ export { default as Permission } from './Permission';
 export { default as GroupList } from './GroupList';
 export { default as GroupNodes } from './GroupNodes';
 export { default as AddNewGroup } from './AddNewGroup';
+export { default as DeleteGroup } from './DeleteGroup';

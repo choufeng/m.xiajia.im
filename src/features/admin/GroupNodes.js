@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import { Grid, Button } from '@material-ui/core'
-
+import {DeleteGroup} from './'
 export class GroupNodes extends Component {
   static propTypes = {
     admin: PropTypes.object.isRequired,
@@ -18,19 +18,6 @@ export class GroupNodes extends Component {
       list: [],
       title: ''
     }
-    this.handleDeleteGroup = this.handleDeleteGroup.bind(this)
-  }
-
-  //实现list
-  componentDidMount() {
-  }
-
-  async handleDeleteGroup() {
-    // 流程要梳理的，判断再给出是否显示提示
-    await this.props.actions.deleteGroup({id: this.props.admin.activeGroup.id})
-    this.props.commonActions.showMessageBox('delete successful', 'success')
-    this.props.actions.fetchGroupList()
-    this.props.actions.clearActiveGroup()
   }
 
   render() {
@@ -57,7 +44,7 @@ export class GroupNodes extends Component {
                   <Button variant="contained" color="primary">保存设定</Button>
                 </Grid>
                 <Grid item xs={12} className="admin-group-nodes-buttons-item">
-                  <Button onClick={this.handleDeleteGroup} variant="contained" color="secondary" disabled={this.props.admin.deleteGroupPending}>删除这个组</Button>
+                  <DeleteGroup />
                 </Grid>
               </Grid>
             </div>
