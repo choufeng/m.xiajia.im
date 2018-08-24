@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import classNames from 'classnames'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 export class SidePanel extends Component {
   static propTypes = {
@@ -27,15 +27,17 @@ export class SidePanel extends Component {
   }
 
   render() {
-    const {sideMenu} = this.props.admin
     return (
       <div className="admin-side-panel">
           <ul>
             {
-              sideMenu.map(i => {
+              this.props.admin.sideMenu.map(i => {
                 return (
-                  <li className={classNames('admin-side-panel-item', {'admin-side-panel-item-active': this.isActive(i.title)})} key={i.id}>
-                    <Link to={i.uri}>{i.title}</Link>
+                  // <li className={classNames('admin-side-panel-item', {'admin-side-panel-item-active': this.isActive(i.title)})} key={i.id}>
+                  //   <NavLink to={i.uri}>{i.title}</NavLink>
+                  // </li>
+                  <li className={classNames('admin-side-panel-item')} key={i.id}>
+                    <NavLink to={i.uri} activeClassName={'admin-side-panel-item-active'}>{i.title}</NavLink>
                   </li>
                 )
               })

@@ -9,7 +9,11 @@ const initialState = {
   sideMenu: [],
   setSideMenuPending: false,
   setSideMenuError: null,
-  sideSelected: ''
+  sideSelected: '',
+  groupList: [],
+  fetchGroupListPending: false,
+  fetchGroupListError: null,
+  activeGroup: ''
 };
 
 export default initialState;

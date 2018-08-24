@@ -9,10 +9,14 @@
 import initialState from './initialState';
 import { reducer as setSideMenuReducer } from './setSideMenu';
 import { reducer as setSideSelectedReducer } from './setSideSelected';
+import { reducer as fetchGroupListReducer } from './fetchGroupList';
+import { reducer as setActiveGroupReducer } from './setActiveGroup';
 
 const reducers = [
   setSideMenuReducer,
   setSideSelectedReducer,
+  fetchGroupListReducer,
+  setActiveGroupReducer,
 ];
 
 export default function reducer(state = initialState, action) {

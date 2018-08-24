@@ -1,0 +1,56 @@
+@import '../../styles/mixins';
+
+.admin-group-list {
+  height: 94vh;
+  max-height: 94vh;
+  min-height: 94vh;
+  border-right: 1px solid #dcdcdc;
+  margin: 0 1rem;
+  .admin-group-list-title {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+  .admin-group-list-active {
+    background: #dcdcdc;
+    color: #000;
+  }
+  .admin-group-list-li {
+    height: 82vh;
+    min-height: 82vh;
+    max-height: 82vh;
+    overflow-y: auto;
+    border-top: 1px dotted #dcdcdc;
+    border-bottom: 1px dotted #dcdcdc;
+    border-left: 1px dotted #dcdcdc;
+  }
+  .admin-group-list-bottom {
+    text-align: center;
+    padding-top: 1rem;
+  }
+  .admin-group-list-addbutton {
+    width: auto;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      height: 3.5rem;
+      line-height: 3.5rem;
+      background: #fdfdfd;
+      border-bottom: 1px dotted #dcdcdc;
+      cursor: pointer;
+      padding-left: 1rem;
+      font-size: 1.4rem;
+      text-align: center;
+      color: #888;
+    }
+    // li:last-child {
+    //   border-bottom: 0px;
+    // }
+    li:hover {
+      background: #eeeeee;
+    }
+  }
+}

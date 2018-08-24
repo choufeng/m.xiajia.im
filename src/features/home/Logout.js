@@ -19,7 +19,6 @@ export class Logout extends Component {
   render() {
     return (
       <div className="home-logout">
-        logout success
       </div>
     );
   }

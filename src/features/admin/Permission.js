@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-
+import {Grid} from '@material-ui/core'
+import {GroupList, GroupNodes} from './'
 export class Permission extends Component {
   static propTypes = {
     admin: PropTypes.object.isRequired,
@@ -17,7 +18,14 @@ export class Permission extends Component {
   render() {
     return (
       <div className="admin-permission">
-        Page Content: admin/Permission
+        <Grid container>
+          <Grid item xs={3}>
+            <GroupList />
+          </Grid>
+          <Grid item xs={9}>
+            <GroupNodes />
+          </Grid>
+        </Grid>
       </div>
     );
   }

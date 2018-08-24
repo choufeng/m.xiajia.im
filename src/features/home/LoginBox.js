@@ -45,7 +45,7 @@ export class LoginBox extends Component {
       this.setState({
         btnStatus: false
       })
-      this.props.history.push('/admin')
+      this.props.history.push('/admin/dashboard')
     }, 2000)
   }
   inputUsername (e) {

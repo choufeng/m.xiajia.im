@@ -1,6 +1,8 @@
 // This is the JSON way to define React Router rules in a Rekit app.
 // Learn more from: http://rekit.js.org/docs/routing.html
 
+// This is the JSON way to define React Router rules in a Rekit app.
+// Learn more from: http://rekit.js.org/docs/routing.html
 import {
   DefaultPage,
   Layout,
@@ -12,7 +14,7 @@ export default {
   name: 'Admin',
   component: Layout,
   childRoutes: [
-    { path: 'default-page', name: 'Default page', component: DefaultPage, isIndex: true },
+    { path: 'dashboard', name: 'Default page', component: DefaultPage, isIndex: true },
     { path: 'permission', name: 'Permission', component: Permission },
   ],
 };
