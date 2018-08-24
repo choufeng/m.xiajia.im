@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import classNames from 'classnames';
-import {Button} from '@material-ui/core';
+import {AddNewGroup} from './';
 
 export class GroupList extends Component {
   constructor(props) {
@@ -22,28 +22,34 @@ export class GroupList extends Component {
   }
 
   isActive(id) {
-    return (id === this.props.admin.activeGroup)
+    return (id === this.props.admin.activeGroup.id)
   }
 
-  setActive(id) {
-    this.props.actions.setActiveGroup(id)
+  setActive(i) {
+    this.props.actions.setActiveGroup(i)
+    this.props.actions.setGroupNodes()
   }
 
   render() {
     return (
       <div className="admin-group-list">
         <div className="admin-group-list-title">权限组列表</div>
-        <ul className="admin-group-list-li">
-          {
-            this.props.admin.groupList.map(i => {
-              return (
-                <li onClick={e => {this.setActive(i.id); e.preventDefault();}} className={classNames({'admin-group-list-active': this.isActive(i.id)})}>{i.group_name}</li>
-              )
-            })
-          }
-        </ul>
+        {
+          this.props.admin.fetchGroupListPending ? <div className="admin-group-list-loading">数据加载中...</div> : 
+          <ul className="admin-group-list-li">
+            {
+              this.props.admin.groupList.map(i => {
+                return (
+                  <li onClick={e => {this.setActive(i); e.preventDefault();}} className={classNames({'admin-group-list-active': this.isActive(i.id)})} key={i.id}>
+                    {i.group_name}
+                  </li>
+                )
+              })
+            }
+          </ul>
+        }
         <div className="admin-group-list-bottom">
-          <Button variant="contained" color="primary" className={'admin-group-list-addbutton'}>Add Group</Button>
+          <AddNewGroup />
         </div>
       </div>
     );

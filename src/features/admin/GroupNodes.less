@@ -1,5 +1,30 @@
 @import '../../styles/mixins';
 
 .admin-group-nodes {
-  background: #444444;
+  height: 94vh;
+  max-height: 94vh;
+  min-height: 94vh;
+  .admin-group-nodes-title {
+    text-align: left;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+  .admin-group-nodes-buttons {
+    text-align: center;
+    .admin-group-nodes-buttons-item {
+      padding: 1rem;
+    }
+  }
+  .admin-group-nodes-content {
+    min-height: 94vh;
+    max-height: 94vh;
+    border-right: 1px dotted #dcdcdc;
+    .admin-group-nodes-list {
+      border: 1px dotted #dcdcdc;
+      border-right: 0px;
+      min-height: 88vh;
+      max-height: 88vh;
+      overflow-y: auto;
+    }
+  }
 }

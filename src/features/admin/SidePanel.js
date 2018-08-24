@@ -14,7 +14,7 @@ export class SidePanel extends Component {
 
   constructor(props) {
     super(props)
-    this.state = []
+    this.state = {}
     this.isActive = this.isActive.bind(this)
   }
 

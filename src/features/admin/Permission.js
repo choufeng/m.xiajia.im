@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import {Grid} from '@material-ui/core'
 import {GroupList, GroupNodes} from './'
+import {isEmpty, not} from 'ramda';
 export class Permission extends Component {
   static propTypes = {
     admin: PropTypes.object.isRequired,
@@ -15,6 +16,10 @@ export class Permission extends Component {
     this.props.actions.setSideSelected('权限管理')
   }
 
+  hasGroupNodes(t) {
+    return not(isEmpty(t))
+  }
+
   render() {
     return (
       <div className="admin-permission">
@@ -23,7 +28,9 @@ export class Permission extends Component {
             <GroupList />
           </Grid>
           <Grid item xs={9}>
-            <GroupNodes />
+            { 
+              this.hasGroupNodes(this.props.admin.activeGroup) && <GroupNodes />
+            }
           </Grid>
         </Grid>
       </div>

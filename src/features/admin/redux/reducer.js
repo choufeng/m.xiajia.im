@@ -11,12 +11,20 @@ import { reducer as setSideMenuReducer } from './setSideMenu';
 import { reducer as setSideSelectedReducer } from './setSideSelected';
 import { reducer as fetchGroupListReducer } from './fetchGroupList';
 import { reducer as setActiveGroupReducer } from './setActiveGroup';
+import { reducer as saveNewGroupReducer } from './saveNewGroup';
+import { reducer as setGroupNodesReducer } from './setGroupNodes';
+import { reducer as deleteGroupReducer } from './deleteGroup';
+import { reducer as clearActiveGroupReducer } from './clearActiveGroup';
 
 const reducers = [
   setSideMenuReducer,
   setSideSelectedReducer,
   fetchGroupListReducer,
   setActiveGroupReducer,
+  saveNewGroupReducer,
+  setGroupNodesReducer,
+  deleteGroupReducer,
+  clearActiveGroupReducer,
 ];
 
 export default function reducer(state = initialState, action) {

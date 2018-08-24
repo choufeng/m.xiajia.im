@@ -15,6 +15,6 @@ export default {
   component: Layout,
   childRoutes: [
     { path: 'dashboard', name: 'Default page', component: DefaultPage, isIndex: true },
-    { path: 'permission', name: 'Permission', component: Permission },
+    { path: 'permission', name: 'Permission', component: Permission }
   ],
 };
