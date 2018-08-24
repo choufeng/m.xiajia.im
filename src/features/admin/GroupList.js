@@ -34,10 +34,9 @@ export class GroupList extends Component {
     return (
       <div className="admin-group-list">
         <div className="admin-group-list-title">权限组列表</div>
-        {
-          this.props.admin.fetchGroupListPending ? <div className="admin-group-list-loading">数据加载中...</div> : 
           <ul className="admin-group-list-li">
             {
+              this.props.admin.fetchGroupListPending ? <li>列表加载中...</li> : 
               this.props.admin.groupList.map(i => {
                 return (
                   <li onClick={e => {this.setActive(i); e.preventDefault();}} className={classNames({'admin-group-list-active': this.isActive(i.id)})} key={i.id}>
@@ -47,7 +46,6 @@ export class GroupList extends Component {
               })
             }
           </ul>
-        }
         <div className="admin-group-list-bottom">
           <AddNewGroup />
         </div>

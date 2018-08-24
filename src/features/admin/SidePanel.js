@@ -31,11 +31,9 @@ export class SidePanel extends Component {
       <div className="admin-side-panel">
           <ul>
             {
+              this.props.admin.setSideMenuPending ? <li>loading...</li> :
               this.props.admin.sideMenu.map(i => {
                 return (
-                  // <li className={classNames('admin-side-panel-item', {'admin-side-panel-item-active': this.isActive(i.title)})} key={i.id}>
-                  //   <NavLink to={i.uri}>{i.title}</NavLink>
-                  // </li>
                   <li className={classNames('admin-side-panel-item')} key={i.id}>
                     <NavLink to={i.uri} activeClassName={'admin-side-panel-item-active'}>{i.title}</NavLink>
                   </li>
