@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import classNames from 'classnames';
 import {AddNewGroup} from './';
-
+import {LinearProgress} from '@material-ui/core'
 export class GroupList extends Component {
   constructor(props) {
     super(props)
@@ -40,7 +40,7 @@ export class GroupList extends Component {
         <div className="admin-group-list-title">权限组列表</div>
           <ul className="admin-group-list-li">
             {
-              this.props.admin.fetchGroupListPending ? <li>列表加载中...</li> : 
+              this.props.admin.fetchGroupListPending ? <li><LinearProgress /></li> : 
               this.props.admin.groupList.map(i => {
                 return (
                   <li onClick={e => {this.setActive(i); e.preventDefault();}} className={classNames({'admin-group-list-active': this.isActive(i.id)})} key={i.id}>

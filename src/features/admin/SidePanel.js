@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import classNames from 'classnames'
 import {NavLink} from 'react-router-dom'
+import {LinearProgress} from '@material-ui/core'
 
 export class SidePanel extends Component {
   static propTypes = {
@@ -31,7 +32,7 @@ export class SidePanel extends Component {
       <div className="admin-side-panel">
           <ul>
             {
-              this.props.admin.setSideMenuPending ? <li>loading...</li> :
+              this.props.admin.setSideMenuPending ? <li><LinearProgress color={'secondary'}/></li> :
               this.props.admin.sideMenu.map(i => {
                 return (
                   <li className={classNames('admin-side-panel-item')} key={i.id}>
