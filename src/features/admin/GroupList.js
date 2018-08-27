@@ -19,6 +19,11 @@ export class GroupList extends Component {
 
   componentDidMount() {
     this.props.actions.fetchGroupList()
+    this.props.actions.setGroupNodes()
+  }
+
+  componentWillUnmount() {
+    this.props.actions.clearActiveGroup()
   }
 
   isActive(id) {
@@ -27,7 +32,6 @@ export class GroupList extends Component {
 
   setActive(i) {
     this.props.actions.setActiveGroup(i)
-    this.props.actions.setGroupNodes()
   }
 
   render() {
