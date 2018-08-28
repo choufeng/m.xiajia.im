@@ -32,6 +32,9 @@ export class ChangePassword extends Component {
     this.props.closeDialog()
   }
   handleSaveData() { 
+    this.setState({
+      btnStatus: true
+    })
     this.props.actions.saveNewPassword({newPassword: this.state.newPass}).then(res => {
       this.props.commonActions.showMessageBox('密码更新成功', 'success')
       this.handleCancelDialog()
