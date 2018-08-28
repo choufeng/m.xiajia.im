@@ -8,3 +8,4 @@ export { default as GroupNodes } from './GroupNodes';
 export { default as AddNewGroup } from './AddNewGroup';
 export { default as DeleteGroup } from './DeleteGroup';
 export { default as RenderGroupNodesList } from './RenderGroupNodesList';
+export { default as ChangePassword } from './ChangePassword';

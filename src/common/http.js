@@ -19,7 +19,7 @@ class Http {
     let headers = {}
     headers['Content-Type'] = (isPOST && isUpload) ? 'application/x-www-form-urlencoded' : 'application/json'
     headers['Accept'] = 'application/json'
-    headers['x-auth'] = this.token
+    headers['Authorization'] = this.token
     return headers
   }
   getFullURL (path) {

@@ -20,7 +20,9 @@ const initialState = {
   setGroupNodesPending: false,
   setGroupNodesError: null,
   deleteGroupPending: false,
-  deleteGroupError: null
+  deleteGroupError: null,
+  saveNewPasswordPending: false,
+  saveNewPasswordError: null
 };
 
 export default initialState;

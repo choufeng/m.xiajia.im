@@ -6,3 +6,4 @@ export { saveNewGroup, dismissSaveNewGroupError } from './saveNewGroup';
 export { setGroupNodes, dismissSetGroupNodesError } from './setGroupNodes';
 export { deleteGroup, dismissDeleteGroupError } from './deleteGroup';
 export { clearActiveGroup } from './clearActiveGroup';
+export { saveNewPassword, dismissSaveNewPasswordError } from './saveNewPassword';
