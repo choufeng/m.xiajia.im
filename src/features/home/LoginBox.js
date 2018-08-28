@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom';
 import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import {TextField, Grid, Button, FormHelperText, LinearProgress} from '@material-ui/core'
-import {isNil} from 'ramda'
+import localforage from 'localforage'
 
 export class LoginBox extends Component {
   constructor(props) {
@@ -33,6 +33,9 @@ export class LoginBox extends Component {
       username: this.state.username,
       password: this.state.password
     }).then((res) => {
+      localforage.setItem('accessToken', this.props.home.accessToken)
+      localforage.setItem('userId', this.props.home.userId)
+      localforage.setItem('userName', this.state.username)
       this.props.commonActions.showMessageBox('login successful', 'success')
       this.props.history.push('/admin/dashboard')
     }).catch(err => {
