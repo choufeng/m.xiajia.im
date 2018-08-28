@@ -1,6 +1,8 @@
 import initialState from './initialState';
+import { reducer as fetchLoginReducer } from './fetchLogin';
 
 const reducers = [
+  fetchLoginReducer,
 ];
 
 export default function reducer(state = initialState, action) {

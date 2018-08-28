@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom';
 import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import {TextField, Grid, Button, FormHelperText, LinearProgress} from '@material-ui/core'
-import api from '../../common/api'
+import {isNil} from 'ramda'
 
 export class LoginBox extends Component {
   constructor(props) {
@@ -22,7 +22,6 @@ export class LoginBox extends Component {
     this.doLogin = this.doLogin.bind(this)
     this.inputUsername = this.inputUsername.bind(this)
     this.inputPassword = this.inputPassword.bind(this)
-    this.getVersion = this.getVersion.bind(this)
   }
   static propTypes = {
     home: PropTypes.object.isRequired,
@@ -30,23 +29,15 @@ export class LoginBox extends Component {
   };
   
   doLogin () {
-    this.setState({show: true})
-    api.get(`Users/login`).then(res => {
-      console.log(res)
-    }).catch(e => {
-      console.log(e)
-    })
-    this.setState({
-      btnStatus: true
-    })
-    console.log('doLogin')
-    setTimeout(() => {
+    this.props.actions.fetchLogin({
+      username: this.state.username,
+      password: this.state.password
+    }).then((res) => {
       this.props.commonActions.showMessageBox('login successful', 'success')
-      this.setState({
-        btnStatus: false
-      })
       this.props.history.push('/admin/dashboard')
-    }, 2000)
+    }).catch(err => {
+      this.props.commonActions.showMessageBox(this.props.home.fetchLoginError, 'error')
+    })
   }
   inputUsername (e) {
     if (e.target.value === 'a') {
@@ -69,15 +60,7 @@ export class LoginBox extends Component {
     })
   }
 
-  getVersion () {
-    api.get(`basic_config/findOne?filter=${JSON.stringify({where:{key:'version'}})}`).then(res => {
-      console.log('version:', res.data.value)
-      this.setState({version: res.data.value})
-    })
-  }
-
   componentDidMount () {
-    this.getVersion()
   }
 
   render() {
@@ -92,14 +75,11 @@ export class LoginBox extends Component {
             <TextField type="password" value={this.state.password} onChange={this.inputPassword} label="Password" className="hlb-input" />
           </Grid>
           <Grid item xs={12}>
-            <Button variant="outlined" color="inherit" className="hlb-button" onClick={this.doLogin} disabled={this.state.btnStatus}> Login </Button>
+            <Button variant="outlined" color="inherit" className="hlb-button" onClick={this.doLogin} disabled={this.props.home.fetchLoginPending}> Login </Button>
           </Grid>
           <Grid item xs={12}>
-            {this.state.btnStatus && <LinearProgress className="hlb-input" />}
+            {this.props.home.fetchLoginPending && <LinearProgress className="hlb-input" />}
           </Grid>
-          {/* <Grid item xs={12}>
-            Version: {this.state.version}
-          </Grid> */}
         </Grid>
       </div>
     );
