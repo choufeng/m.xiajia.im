@@ -7,3 +7,4 @@ export { setGroupNodes, dismissSetGroupNodesError } from './setGroupNodes';
 export { deleteGroup, dismissDeleteGroupError } from './deleteGroup';
 export { clearActiveGroup } from './clearActiveGroup';
 export { saveNewPassword, dismissSaveNewPasswordError } from './saveNewPassword';
+export { updateGroup, dismissUpdateGroupError } from './updateGroup';

@@ -35,7 +35,7 @@ export default class RenderGroupNodesList extends Component {
           addIndex(map)((v, i) => {
             return (<li key={i}>
               <FromControllLabel control={
-                <Switch checked={v.selected} value={v.selected} onChange={this.handleClick(i)}></Switch>
+                <Switch checked={v.selected} value={v.name} onChange={this.handleClick(i)}></Switch>
               } label={v.name} />
             </li>)
           }, this.props.list)

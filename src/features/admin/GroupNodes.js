@@ -21,22 +21,41 @@ export class GroupNodes extends Component {
       title: ''
     }
     this.groupNodesWithAll = this.groupNodesWithAll.bind(this)
+    this.handleChangeNode = this.handleChangeNode.bind(this)
+    this.handleSaveActiveNodes = this.handleSaveActiveNodes.bind(this)
   }
 
+  isSelected (item, list) {
+    return R.indexOf(item, list) > -1
+  }
 
   groupNodesWithAll () {
-    let all = this.props.admin.groupNodes
+    let selectedList = this.props.admin.groupNodes
     let d = R.map(i => {
-      i.selected = true
+      i.selected = this.isSelected(i.nodekey, this.props.admin.activeGroup.nodekeys)
       return i
-    }, all)
-    let data = R.groupWith((a, b) => R.equals(a.category, b.category), d)
-    return data
+    }, selectedList)
+    return R.groupWith((a, b) => R.equals(a.category, b.category), d)
   }
 
   handleChangeNode (nodekey) {
     // 把所有的node组织回传递的结构， 提取出所有需要传递的点。发出请求。
     // 循环所有列表，找到这个nodekey并设置为反bool, 提交数据
+    // 目标就是设定groupNodes.nodekey
+    const list = this.props.admin.activeGroup
+    if (this.isSelected(nodekey, this.props.admin.activeGroup.nodekeys)) {
+      list.nodekeys = R.reject(R.equals(nodekey), (list.nodekeys))
+      this.props.actions.setActiveGroup(list)
+    } else {
+      list.nodekeys = R.append(nodekey, list.nodekeys)
+      this.props.actions.setActiveGroup(list)
+    }
+    this.handleSaveActiveNodes()
+  }
+
+  handleSaveActiveNodes () {
+    // 执行保存过程
+    this.props.actions.updateGroup(this.props.admin.activeGroup)
   }
 
   render() {
@@ -60,9 +79,6 @@ export class GroupNodes extends Component {
             <div className="admin-group-nodes-title">操作</div>
             <div className="admin-group-nodes-buttons">
               <Grid container>
-                <Grid item xs={12} className="admin-group-nodes-buttons-item">
-                  <Button variant="contained" color="primary">保存设定</Button>
-                </Grid>
                 <Grid item xs={12} className="admin-group-nodes-buttons-item">
                   <DeleteGroup />
                 </Grid>

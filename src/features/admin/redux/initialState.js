@@ -22,7 +22,9 @@ const initialState = {
   deleteGroupPending: false,
   deleteGroupError: null,
   saveNewPasswordPending: false,
-  saveNewPasswordError: null
+  saveNewPasswordError: null,
+  updateGroupPending: false,
+  updateGroupError: null
 };
 
 export default initialState;
