@@ -36,7 +36,7 @@ export class LoginBox extends Component {
       localforage.setItem('accessToken', this.props.home.accessToken)
       localforage.setItem('userId', this.props.home.userId)
       localforage.setItem('userName', this.state.username)
-      this.props.actions.fetchGetUserInfo(this.props.home.userId).then(res => {
+      this.props.actions.fetchGetUserGroup(this.props.home.userId).then(res => {
         localforage.setItem('roleNodes', this.props.home.roleNodes)
         this.props.commonActions.showMessageBox('login successful', 'success')
         this.props.history.push('/admin/dashboard')

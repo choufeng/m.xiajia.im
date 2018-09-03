@@ -17,6 +17,7 @@ import { reducer as deleteGroupReducer } from './deleteGroup';
 import { reducer as clearActiveGroupReducer } from './clearActiveGroup';
 import { reducer as saveNewPasswordReducer } from './saveNewPassword';
 import { reducer as updateGroupReducer } from './updateGroup';
+import { reducer as fetchManagerListReducer } from './fetchManagerList';
 
 const reducers = [
   setSideMenuReducer,
@@ -29,6 +30,7 @@ const reducers = [
   clearActiveGroupReducer,
   saveNewPasswordReducer,
   updateGroupReducer,
+  fetchManagerListReducer,
 ];
 
 export default function reducer(state = initialState, action) {

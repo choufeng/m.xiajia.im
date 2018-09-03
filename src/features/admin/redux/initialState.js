@@ -24,7 +24,10 @@ const initialState = {
   saveNewPasswordPending: false,
   saveNewPasswordError: null,
   updateGroupPending: false,
-  updateGroupError: null
+  updateGroupError: null,
+  fetchManagerListPending: false,
+  fetchManagerListError: null,
+  managerList:[]
 };
 
 export default initialState;

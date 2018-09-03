@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
-import { Grid, Button } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import {DeleteGroup, RenderGroupNodesList} from './'
 import * as R from 'ramda';
 

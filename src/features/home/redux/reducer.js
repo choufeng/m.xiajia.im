@@ -1,10 +1,12 @@
 import initialState from './initialState';
 import { reducer as fetchLoginReducer } from './fetchLogin';
 import { reducer as fetchGetUserInfoReducer } from './fetchGetUserInfo';
+import { reducer as fetchGetUserGroupReducer } from './fetchGetUserGroup';
 
 const reducers = [
   fetchLoginReducer,
   fetchGetUserInfoReducer,
+  fetchGetUserGroupReducer,
 ];
 
 export default function reducer(state = initialState, action) {
