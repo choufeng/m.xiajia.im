@@ -36,7 +36,7 @@ export function fetchGroupList(args = {}) {
         (err) => {
           dispatch({
             type: ADMIN_FETCH_GROUP_LIST_FAILURE,
-            data: { error: err },
+            data: { error: err.response.data.error.message },
           });
           reject(err);
         },
