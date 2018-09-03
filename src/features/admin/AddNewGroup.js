@@ -19,7 +19,8 @@ export class AddNewGroup extends Component {
       dialogOpen: false,
       modal: {
         group_name: '',
-        description: ''
+        description: '',
+        nodekeys: []
       }
     }
     this.handleOpenDialog = this.handleOpenDialog.bind(this)
