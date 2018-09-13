@@ -1,17 +1,17 @@
 import {
-  ADMIN_FETCH_MANAGER_LIST_BEGIN,
-  ADMIN_FETCH_MANAGER_LIST_SUCCESS,
-  ADMIN_FETCH_MANAGER_LIST_FAILURE,
-  ADMIN_FETCH_MANAGER_LIST_DISMISS_ERROR,
+  ADMIN_DELETE_MANAGER_BEGIN,
+  ADMIN_DELETE_MANAGER_SUCCESS,
+  ADMIN_DELETE_MANAGER_FAILURE,
+  ADMIN_DELETE_MANAGER_DISMISS_ERROR,
 } from './constants';
-import api from '../../../common/api'
+import api from '../../../common/api';
 
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
-export function fetchManagerList(args = {}) {
+export function deleteManager(args = {}) {
   return (dispatch) => { // optionally you can have getState as the second argument
     dispatch({
-      type: ADMIN_FETCH_MANAGER_LIST_BEGIN,
+      type: ADMIN_DELETE_MANAGER_BEGIN,
     });
 
     // Return a promise so that you could control UI flow without states in the store.
@@ -23,11 +23,11 @@ export function fetchManagerList(args = {}) {
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
       // const doRequest = args.error ? Promise.reject(new Error()) : Promise.resolve();
-      const doRequest = api.get('manager')
+      const doRequest = api.delete(`manager/${args.id}`)
       doRequest.then(
         (res) => {
           dispatch({
-            type: ADMIN_FETCH_MANAGER_LIST_SUCCESS,
+            type: ADMIN_DELETE_MANAGER_SUCCESS,
             data: res.data,
           });
           resolve(res);
@@ -35,8 +35,8 @@ export function fetchManagerList(args = {}) {
         // Use rejectHandler as the second argument so that render errors won't be caught.
         (err) => {
           dispatch({
-            type: ADMIN_FETCH_MANAGER_LIST_FAILURE,
-            data: { error: err.response.data.error.message },
+            type: ADMIN_DELETE_MANAGER_FAILURE,
+            data: { error: err },
           });
           reject(err);
         },
@@ -49,44 +49,43 @@ export function fetchManagerList(args = {}) {
 
 // Async action saves request error by default, this method is used to dismiss the error info.
 // If you don't want errors to be saved in Redux store, just ignore this method.
-export function dismissFetchManagerListError() {
+export function dismissDeleteManagerError() {
   return {
-    type: ADMIN_FETCH_MANAGER_LIST_DISMISS_ERROR,
+    type: ADMIN_DELETE_MANAGER_DISMISS_ERROR,
   };
 }
 
 export function reducer(state, action) {
   switch (action.type) {
-    case ADMIN_FETCH_MANAGER_LIST_BEGIN:
+    case ADMIN_DELETE_MANAGER_BEGIN:
       // Just after a request is sent
       return {
         ...state,
-        fetchManagerListPending: true,
-        fetchManagerListError: null,
+        deleteManagerPending: true,
+        deleteManagerError: null,
       };
 
-    case ADMIN_FETCH_MANAGER_LIST_SUCCESS:
+    case ADMIN_DELETE_MANAGER_SUCCESS:
       // The request is success
       return {
         ...state,
-        fetchManagerListPending: false,
-        fetchManagerListError: null,
-        managerList: action.data,
+        deleteManagerPending: false,
+        deleteManagerError: null,
       };
 
-    case ADMIN_FETCH_MANAGER_LIST_FAILURE:
+    case ADMIN_DELETE_MANAGER_FAILURE:
       // The request is failed
       return {
         ...state,
-        fetchManagerListPending: false,
-        fetchManagerListError: action.data.error,
+        deleteManagerPending: false,
+        deleteManagerError: action.data.error,
       };
 
-    case ADMIN_FETCH_MANAGER_LIST_DISMISS_ERROR:
+    case ADMIN_DELETE_MANAGER_DISMISS_ERROR:
       // Dismiss the request failure error
       return {
         ...state,
-        fetchManagerListError: null,
+        deleteManagerError: null,
       };
 
     default:

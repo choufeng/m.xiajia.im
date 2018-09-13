@@ -13,7 +13,7 @@ const initialState = {
   groupList: [],
   fetchGroupListPending: false,
   fetchGroupListError: null,
-  activeGroup: '',
+  activeGroup: {},
   saveNewGroupPending: false,
   saveNewGroupError: null,
   groupNodes: [],
@@ -27,7 +27,12 @@ const initialState = {
   updateGroupError: null,
   fetchManagerListPending: false,
   fetchManagerListError: null,
-  managerList:[]
+  managerList:[],
+  activeManager: {},
+  saveNewManagerPending: false,
+  saveNewManagerError: null,
+  deleteManagerPending: false,
+  deleteManagerError: null
 };
 
 export default initialState;

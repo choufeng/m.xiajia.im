@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import {Grid} from '@material-ui/core'
-import {ManagerList} from './'
+import {ManagerList} from './';
+import {ManagerContent} from './';
+import {not, isEmpty} from 'ramda';
 
 export class Managers extends Component {
   static propTypes = {
@@ -16,6 +18,10 @@ export class Managers extends Component {
     this.props.actions.setSideSelected('人员管理')
   }
 
+  hasManagerContent(t) {
+    return not(isEmpty(t))
+  }
+
   render() {
     return (
       <div className="admin-managers">
@@ -24,9 +30,9 @@ export class Managers extends Component {
             <ManagerList />
           </Grid>
           <Grid item xs={9}>
-            {/* { 
-              this.hasGroupNodes(this.props.admin.activeGroup) && <GroupNodes />
-            } */}
+            { 
+              this.hasManagerContent(this.props.admin.activeManager) && <ManagerContent />
+            }
           </Grid>
         </Grid>
       </div>

@@ -11,3 +11,6 @@ export { default as RenderGroupNodesList } from './RenderGroupNodesList';
 export { default as ChangePassword } from './ChangePassword';
 export { default as Managers } from './Managers';
 export { default as ManagerList } from './ManagerList';
+export { default as ManagerContent } from './ManagerContent';
+export { default as DeleteManager } from './DeleteManager';
+export { default as AddNewManager } from './AddNewManager';

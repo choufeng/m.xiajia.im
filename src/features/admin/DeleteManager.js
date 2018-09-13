@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-import * as commonActions from '../common/redux/actions'
-import {Button, TextField, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from '@material-ui/core';
-import {equals} from 'ramda';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core';
+import { equals } from 'ramda';
+import * as commonActions from '../common/redux/showMessageBox';
 
-export class DeleteGroup extends Component {
+export class DeleteManager extends Component {
   static propTypes = {
     admin: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       dialogOpen: false,
@@ -21,9 +21,9 @@ export class DeleteGroup extends Component {
       errmsg: ''
     }
     this.handleClose = this.handleClose.bind(this)
-    this.showDeleteDialog = this.showDeleteDialog.bind(this)
-    this.handleDeleteGroup = this.handleDeleteGroup.bind(this)
     this.handleChangeConfirm = this.handleChangeConfirm.bind(this)
+    this.handleDeleteGroup = this.handleDeleteGroup.bind(this)
+    this.showDeleteDialog = this.showDeleteDialog.bind(this)
   }
 
   handleClose() {
@@ -35,26 +35,24 @@ export class DeleteGroup extends Component {
 
   showDeleteDialog() {
     this.setState({
-      dialogOpen: true
+      dialogOpen: true,
     })
   }
 
-  isRightConfirm (a, c) {
+  isRightConfirm(a, c) {
     return equals(a, c)
   }
 
   async handleDeleteGroup() {
-    // 1. 确认输入是否正确， 正确则执行delete， 得到反馈结果
-    console.log()
-    if (this.isRightConfirm(this.state.confirm, this.props.admin.activeGroup.name)) {
-      await this.props.actions.deleteGroup({id: this.props.admin.activeGroup.id})
-      if (this.props.admin.deleteGroupError) {
-        this.props.commonActions.showMessageBox('删除失败，', 'error')
+    if (this.isRightConfirm(this.state.confirm, this.props.admin.activeManager.username)) {
+      await this.props.actions.deleteManager({id: this.props.admin.activeManager.id})
+      if (this.props.admin.deleteManagerError) {
+        this.props.commonActions.showMessageBox('删除失败', 'error')
       } else {
         this.props.commonActions.showMessageBox('delete successful', 'success')
       }
-      this.props.actions.fetchGroupList()
-      this.props.actions.clearActiveGroup()
+      this.props.actions.fetchManagerList()
+      this.props.actions.clearActiveManager()
     } else {
       this.setState({
         errmsg: '输入的名称不匹配，无法删除.'
@@ -70,12 +68,12 @@ export class DeleteGroup extends Component {
 
   render() {
     return (
-      <div className="admin-delete-group">
-        <Button onClick={this.showDeleteDialog} variant="contained" color="secondary" disabled={this.props.admin.deleteGroupPending}>删除这个组</Button>
+      <div className="admin-delete-manager">
+        <Button onClick={this.showDeleteDialog} variant="contained" color="secondary" disabled={this.props.admin.deleteGroupPending}>删除这个人员</Button>
         <Dialog open={this.state.dialogOpen}>
           <DialogTitle>请确认</DialogTitle>
           <DialogContent>
-            <DialogContentText>确定要删除这个分组么？请输入分组名称确认删除：</DialogContentText>
+            <DialogContentText>确定要删除么？请输入名称确认删除：</DialogContentText>
             <TextField margin="normal" onChange={this.handleChangeConfirm} fullWidth></TextField>
             <DialogContentText>{this.state.errmsg}</DialogContentText>
           </DialogContent>
@@ -107,4 +105,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DeleteGroup);
+)(DeleteManager);

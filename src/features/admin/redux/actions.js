@@ -9,3 +9,7 @@ export { clearActiveGroup } from './clearActiveGroup';
 export { saveNewPassword, dismissSaveNewPasswordError } from './saveNewPassword';
 export { updateGroup, dismissUpdateGroupError } from './updateGroup';
 export { fetchManagerList, dismissFetchManagerListError } from './fetchManagerList';
+export { setActiveManager } from './setActiveManager';
+export { clearActiveManager } from './clearActiveManager';
+export { saveNewManager, dismissSaveNewManagerError } from './saveNewManager';
+export { deleteManager, dismissDeleteManagerError } from './deleteManager';

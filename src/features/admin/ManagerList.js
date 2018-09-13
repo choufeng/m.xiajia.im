@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import {LinearProgress} from '@material-ui/core'
-import {classNames} from 'classnames'
+import classNames from 'classnames'
+import { has } from 'ramda';
+import { AddNewManager } from './';
 
 export class ManagerList extends Component {
   static propTypes = {
@@ -20,11 +22,11 @@ export class ManagerList extends Component {
   }
 
   setActive (i) {
-    return true
+    this.props.actions.setActiveManager(i)
   }
 
   isActive(id) {
-    return true
+    return (id === this.props.admin.activeManager.id)
   }
 
   componentDidMount() {
@@ -44,14 +46,14 @@ export class ManagerList extends Component {
               this.props.admin.managerList.map(i => {
                 return (
                   <li onClick={e => {this.setActive(i); e.preventDefault();}} className={classNames({'admin-manager-list-active': this.isActive(i.id)})} key={i.id}>
-                    {i.name}
+                    {i.username}
                   </li>
                 )
               })
             }
           </ul>
         <div className="admin-manager-list-bottom">
-          {/* <AddNewGroup /> */}
+          <AddNewManager/>
         </div>
       </div>
     );
