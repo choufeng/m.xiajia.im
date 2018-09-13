@@ -8,6 +8,7 @@ import {LinearProgress} from '@material-ui/core'
 import classNames from 'classnames'
 import { has } from 'ramda';
 import { AddNewManager } from './';
+import { CANNOT_LOAD_LIST } from '../../common/consts';
 
 export class ManagerList extends Component {
   static propTypes = {
@@ -31,7 +32,7 @@ export class ManagerList extends Component {
 
   componentDidMount() {
     this.props.actions.fetchManagerList().catch(() => {
-      this.props.commonActions.showMessageBox(`未能成功加载用户列表: ${this.props.admin.fetchManagerListError}`, 'error')
+      this.props.commonActions.showMessageBox(`${CANNOT_LOAD_LIST}: ${this.props.admin.fetchManagerListError}`, 'error')
       console.log(this.props.admin.fetchManagerListError)
     })
   }

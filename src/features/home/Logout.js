@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import {withRouter} from 'react-router-dom'
 import * as commonActions from '../common/redux/actions'
+import { LOGOUT_SUCCESS } from '../../common/consts';
 
 export class Logout extends Component {
   static propTypes = {
@@ -12,7 +13,7 @@ export class Logout extends Component {
     actions: PropTypes.object.isRequired,
   };
   componentDidMount() {
-    this.props.commonActions.showMessageBox('logout successful', 'success')
+    this.props.commonActions.showMessageBox(LOGOUT_SUCCESS, 'success')
     this.props.history.replace('/')
   }
 

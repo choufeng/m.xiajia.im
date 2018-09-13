@@ -6,6 +6,7 @@ import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import {Button, TextField, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from '@material-ui/core';
 import {equals} from 'ramda';
+import { DELETE_FAILURE, FAILURE, DELETE_SUCCESS, SUCCESS, CANNOT_DELETE, SURE_DELETE } from '../../common/consts';
 
 export class DeleteGroup extends Component {
   static propTypes = {
@@ -49,15 +50,15 @@ export class DeleteGroup extends Component {
     if (this.isRightConfirm(this.state.confirm, this.props.admin.activeGroup.name)) {
       await this.props.actions.deleteGroup({id: this.props.admin.activeGroup.id})
       if (this.props.admin.deleteGroupError) {
-        this.props.commonActions.showMessageBox('删除失败，', 'error')
+        this.props.commonActions.showMessageBox(DELETE_FAILURE, FAILURE)
       } else {
-        this.props.commonActions.showMessageBox('delete successful', 'success')
+        this.props.commonActions.showMessageBox(DELETE_SUCCESS, SUCCESS)
       }
       this.props.actions.fetchGroupList()
       this.props.actions.clearActiveGroup()
     } else {
       this.setState({
-        errmsg: '输入的名称不匹配，无法删除.'
+        errmsg: CANNOT_DELETE
       })
     }
   }
@@ -75,7 +76,7 @@ export class DeleteGroup extends Component {
         <Dialog open={this.state.dialogOpen}>
           <DialogTitle>请确认</DialogTitle>
           <DialogContent>
-            <DialogContentText>确定要删除这个分组么？请输入分组名称确认删除：</DialogContentText>
+            <DialogContentText>{SURE_DELETE}</DialogContentText>
             <TextField margin="normal" onChange={this.handleChangeConfirm} fullWidth></TextField>
             <DialogContentText>{this.state.errmsg}</DialogContentText>
           </DialogContent>

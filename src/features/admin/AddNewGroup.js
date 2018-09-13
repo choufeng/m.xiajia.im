@@ -6,6 +6,7 @@ import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import {Button, TextField, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from '@material-ui/core';
 import {assoc} from 'ramda';
+import { ADD_SUCCESS, SUCCESS } from '../../common/consts';
 
 export class AddNewGroup extends Component {
   static propTypes = {
@@ -38,7 +39,7 @@ export class AddNewGroup extends Component {
   async handleSaveData () {
     // 进行数据保存`
     await this.props.actions.saveNewGroup(this.state.modal)
-    this.props.commonActions.showMessageBox('添加成功', 'success')
+    this.props.commonActions.showMessageBox(ADD_SUCCESS, SUCCESS)
     this.handleCancelDialog()
     this.props.actions.fetchGroupList()
   }

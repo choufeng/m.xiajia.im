@@ -6,6 +6,7 @@ import * as actions from './redux/actions';
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core';
 import { equals } from 'ramda';
 import * as commonActions from '../common/redux/showMessageBox';
+import { DELETE_FAILURE, FAILURE, DELETE_SUCCESS, SUCCESS } from '../../common/consts';
 
 export class DeleteManager extends Component {
   static propTypes = {
@@ -47,9 +48,9 @@ export class DeleteManager extends Component {
     if (this.isRightConfirm(this.state.confirm, this.props.admin.activeManager.username)) {
       await this.props.actions.deleteManager({id: this.props.admin.activeManager.id})
       if (this.props.admin.deleteManagerError) {
-        this.props.commonActions.showMessageBox('删除失败', 'error')
+        this.props.commonActions.showMessageBox(DELETE_FAILURE, FAILURE)
       } else {
-        this.props.commonActions.showMessageBox('delete successful', 'success')
+        this.props.commonActions.showMessageBox(DELETE_SUCCESS, SUCCESS)
       }
       this.props.actions.fetchManagerList()
       this.props.actions.clearActiveManager()

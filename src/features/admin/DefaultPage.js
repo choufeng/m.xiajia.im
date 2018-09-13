@@ -10,7 +10,7 @@ export class DefaultPage extends Component {
     actions: PropTypes.object.isRequired,
   };
   componentDidMount () {
-    this.props.actions.setSideSelected('Dashboard')
+    this.props.actions.setSideSelected('控制台')
   }
   render() {
     return (

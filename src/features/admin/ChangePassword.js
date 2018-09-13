@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
+import { CHANGE_PASSWORD_SUCCESS, SUCCESS, CHANGE_PASSWORD_FAILURE, FAILURE } from '../../common/consts';
 
 export class ChangePassword extends Component {
   static propTypes = {
@@ -36,10 +37,10 @@ export class ChangePassword extends Component {
       btnStatus: true
     })
     this.props.actions.saveNewPassword({newPassword: this.state.newPass}).then(res => {
-      this.props.commonActions.showMessageBox('密码更新成功', 'success')
+      this.props.commonActions.showMessageBox(CHANGE_PASSWORD_SUCCESS, SUCCESS)
       this.handleCancelDialog()
     }).catch(err => {
-      this.props.commonActions.showMessageBox('密码更新失败', 'error')
+      this.props.commonActions.showMessageBox(CHANGE_PASSWORD_FAILURE, FAILURE)
     })
   }
   handleChangeNewPass(e) {

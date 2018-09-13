@@ -6,6 +6,7 @@ import * as actions from './redux/actions';
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core';
 import * as commonActions from '../common/redux/actions';
 import { assoc } from 'ramda';
+import { ADD_SUCCESS, SUCCESS } from '../../common/consts';
 
 export class AddNewManager extends Component {
   static propTypes = {
@@ -52,7 +53,7 @@ export class AddNewManager extends Component {
 
   async handleSaveData() {
     await this.props.actions.saveNewManager(this.state.modal)
-    this.props.commonActions.showMessageBox('添加成功', 'success')
+    this.props.commonActions.showMessageBox(ADD_SUCCESS, SUCCESS)
     this.handleCancelDialog()
     this.props.actions.fetchManagerList()
   }
