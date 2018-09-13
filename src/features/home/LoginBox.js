@@ -33,17 +33,18 @@ export class LoginBox extends Component {
       username: this.state.username,
       password: this.state.password
     }).then((res) => {
-      localforage.setItem('accessToken', this.props.home.accessToken)
-      localforage.setItem('userId', this.props.home.userId)
-      localforage.setItem('userName', this.state.username)
-      this.props.actions.fetchGetUserGroup(this.props.home.userId).then(res => {
-        localforage.setItem('roleNodes', this.props.home.roleNodes)
-        this.props.commonActions.showMessageBox('login successful', 'success')
-        this.props.history.push('/admin/dashboard')
-      })
+      this.saveDataToLocal()
     }).catch(err => {
       this.props.commonActions.showMessageBox(this.props.home.fetchLoginError, 'error')
     })
+  }
+  saveDataToLocal () {
+    localforage.setItem('accessToken', this.props.home.accessToken)
+    localforage.setItem('userId', this.props.home.userId)
+    localforage.setItem('userName', this.state.username)
+    localforage.setItem('roleNodes', this.props.home.roleNodes)
+    this.props.commonActions.showMessageBox('login successful', 'success')
+    this.props.history.push('/admin/dashboard')
   }
   inputUsername (e) {
     if (e.target.value === 'a') {

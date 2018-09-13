@@ -23,7 +23,7 @@ export function updateGroup(args = {}) {
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
       // const doRequest = args.error ? Promise.reject(new Error()) : Promise.resolve();
-      const doRequest = api.patch(`groups/${args.id}`, args)
+      const doRequest = api.put(`group/${args.id}`, args)
       doRequest.then(
         (res) => {
           dispatch({

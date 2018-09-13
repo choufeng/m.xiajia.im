@@ -22,7 +22,7 @@ export function fetchLogin(args = {}) {
       // doRequest is a placeholder Promise. You should replace it with your own logic.
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
-      const doRequest = api.post(`Users/login`, args)
+      const doRequest = api.post(`auth`, args)
       doRequest.then(
         (res) => {
           dispatch({
@@ -33,9 +33,10 @@ export function fetchLogin(args = {}) {
         },
         // Use rejectHandler as the second argument so that render errors won't be caught.
         (err) => {
+          console.log('err')
           dispatch({
             type: HOME_FETCH_LOGIN_FAILURE,
-            data: { error: err.response.data.error.message },
+            data: { error: err },
           });
           reject(err);
         },
@@ -70,8 +71,9 @@ export function reducer(state, action) {
         ...state,
         fetchLoginPending: false,
         fetchLoginError: null,
-        accessToken: action.data.id,
-        userId: action.data.userId
+        accessToken: action.data.token,
+        userId: action.data.name,
+        roleNodes: action.data.nodes,
       };
 
     case HOME_FETCH_LOGIN_FAILURE:

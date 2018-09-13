@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-import {Grid, GroupList} from '@material-ui/core'
+import {Grid} from '@material-ui/core'
 import {ManagerList} from './'
 
 export class Managers extends Component {

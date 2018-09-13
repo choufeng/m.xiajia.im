@@ -23,7 +23,7 @@ export function deleteGroup(args = {}) {
       // doRequest is a placeholder Promise. You should replace it with your own logic.
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
-      const doRequest = api.delete(`groups/${args.id}`)
+      const doRequest = api.delete(`group/${args.id}`)
       doRequest.then(
         (res) => {
           dispatch({

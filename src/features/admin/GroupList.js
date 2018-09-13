@@ -47,7 +47,7 @@ export class GroupList extends Component {
               this.props.admin.groupList.map(i => {
                 return (
                   <li onClick={e => {this.setActive(i); e.preventDefault();}} className={classNames({'admin-group-list-active': this.isActive(i.id)})} key={i.id}>
-                    {i.group_name}
+                    {i.name}
                   </li>
                 )
               })

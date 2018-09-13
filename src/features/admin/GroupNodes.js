@@ -64,7 +64,7 @@ export class GroupNodes extends Component {
       <div className="admin-group-nodes">
         <Grid container>
           <Grid item xs={9} className="admin-group-nodes-content">
-            <div className="admin-group-nodes-title"> <b>{this.props.admin.activeGroup.group_name}</b>权限组的节点权限</div>
+            <div className="admin-group-nodes-title"> <b>{this.props.admin.activeGroup.name}</b>权限组的节点权限</div>
             <div className="admin-group-nodes-list">
             {
               R.addIndex(R.map)((v,i) => {

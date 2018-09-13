@@ -18,9 +18,9 @@ export class AddNewGroup extends Component {
     this.state = {
       dialogOpen: false,
       modal: {
-        group_name: '',
+        name: '',
         description: '',
-        nodekeys: []
+        nodekeys: ''
       }
     }
     this.handleOpenDialog = this.handleOpenDialog.bind(this)
@@ -45,7 +45,7 @@ export class AddNewGroup extends Component {
 
   handleChangeGroupName (e) {
     this.setState({
-      modal: assoc('group_name', e.target.value, this.state.modal)
+      modal: assoc('name', e.target.value, this.state.modal)
     })
   }
 
@@ -65,7 +65,7 @@ export class AddNewGroup extends Component {
             <DialogContentText>
               创建一个权限组, 创建完成后请设置对应权限。
             </DialogContentText>
-            <TextField margin="normal" onChange={this.handleChangeGroupName} ref="group_name" id="group_name" label="输入组名称" type="text" fullWidth autoFocus />
+            <TextField margin="normal" onChange={this.handleChangeGroupName} ref="name" id="name" label="输入组名称" type="text" fullWidth autoFocus />
             <TextField margin="normal" onChange={this.handleChangeDescription} ref="description" id="description" label="输入对分组的描述" type="text" fullWidth />
           </DialogContent>
           <DialogActions>

@@ -23,7 +23,7 @@ export function fetchGroupList(args = {}) {
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
       // const doRequest = args.error ? Promise.reject(new Error()) : Promise.resolve();
-      const doRequest = api.get(`groups`)
+      const doRequest = api.get(`group`)
       doRequest.then(
         (res) => {
           dispatch({

@@ -26,11 +26,20 @@ export function fetchGetUserGroup(id) {
       const doRequest = api.get(`user_info/${id}/groups`)
       doRequest.then(
         (res) => {
-          dispatch({
-            type: HOME_FETCH_GET_USER_GROUP_SUCCESS,
-            data: res.data.nodekeys,
-          });
-          resolve(res);
+          // 这里存在一个可能是，如果group被删除了，这里会返回null
+          if (res.data) {
+            dispatch({
+              type: HOME_FETCH_GET_USER_GROUP_SUCCESS,
+              data: res.data,
+            });
+            resolve(res);
+          } else {
+            dispatch({
+              type: HOME_FETCH_GET_USER_GROUP_FAILURE,
+              data: { error: 'null group result' },
+            });
+            reject(null);
+          }
         },
         // Use rejectHandler as the second argument so that render errors won't be caught.
         (err) => {

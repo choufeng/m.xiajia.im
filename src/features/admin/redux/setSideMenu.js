@@ -1,10 +1,10 @@
-import axios from 'axios'
 import {
   ADMIN_SET_SIDE_MENU_BEGIN,
   ADMIN_SET_SIDE_MENU_SUCCESS,
   ADMIN_SET_SIDE_MENU_FAILURE,
   ADMIN_SET_SIDE_MENU_DISMISS_ERROR,
 } from './constants';
+import api from '../../../common/api';
 
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
@@ -22,9 +22,10 @@ export function setSideMenu(args = {}) {
       // doRequest is a placeholder Promise. You should replace it with your own logic.
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
-      let d = JSON.stringify({order: 'sortby'})
-      const doRequest = axios.get(`http://ide.xiajia.im:3000/api/menus?filter=${d}`)
+      // let d = JSON.stringify({order: 'sortby'})
+      // const doRequest = axios.get(`http://ide.xiajia.im:3000/api/menus?filter=${d}`)
       // const doRequest = args.error ? Promise.reject(new Error()) : Promise.resolve();
+      const doRequest = api.get(`menu`)
       doRequest.then(
         (res) => {
           dispatch({
