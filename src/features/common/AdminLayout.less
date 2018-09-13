@@ -1,0 +1,22 @@
+@import '../../styles/mixins';
+
+.common-admin-layout {
+  .admin-layout-left {
+    height: 100vh;
+    background: #661A1A;
+  }
+  .admin-layout-right {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    .admin-layout-right-top {
+      width: 100%;
+    }
+    .admin-layout-right-content {
+      height: 94vh;
+      float: right;
+      max-height: 94vh;
+      overflow-y: auto;
+    }
+  }
+}

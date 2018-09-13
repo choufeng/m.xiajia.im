@@ -9,15 +9,16 @@
 // Learn more from: http://rekit.js.org/docs/routing.html
 import {
   DefaultPage,
-  Layout,
   Permission,
   Managers,
 } from './';
 
+import AdminLayout from '../common/AdminLayout';
+
 export default {
   path: 'admin',
   name: 'Admin',
-  component: Layout,
+  component: AdminLayout,
   childRoutes: [
     { path: 'dashboard', name: 'Default page', component: DefaultPage, isIndex: true },
     { path: 'permission', name: 'Permission', component: Permission },
