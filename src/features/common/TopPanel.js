@@ -57,7 +57,7 @@ export class TopPanel extends Component {
   render() {
     const { anchorEl } = this.state
     return (
-      <div className="admin-top-panel">
+      <div className="common-top-panel">
         <Grid container spacing={16}>
           <Grid item xs={4} className="admin-top-panel-title"><h3>{this.props.admin.sideSelected}</h3></Grid>
           <Grid item xs={6} className="admin-top-panel-menu"></Grid>
