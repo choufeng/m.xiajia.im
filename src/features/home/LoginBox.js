@@ -7,7 +7,8 @@ import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import {TextField, Grid, Button, FormHelperText, LinearProgress} from '@material-ui/core'
 import localforage from 'localforage'
-import { LOGIN_SUCCESS } from '../../common/consts';
+import { LOGIN_SUCCESS, SUCCESS, FAILURE } from '../../common/consts';
+import getErrorMessage from '../../common/getErrorMessage'
 
 export class LoginBox extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ export class LoginBox extends Component {
     }).then((res) => {
       this.saveDataToLocal()
     }).catch(err => {
-      this.props.commonActions.showMessageBox(this.props.home.fetchLoginError, 'error')
+      this.props.commonActions.showMessageBox(getErrorMessage(err), FAILURE)
     })
   }
   saveDataToLocal () {
@@ -44,7 +45,7 @@ export class LoginBox extends Component {
     localforage.setItem('userId', this.props.home.userId)
     localforage.setItem('userName', this.state.username)
     localforage.setItem('roleNodes', this.props.home.roleNodes)
-    this.props.commonActions.showMessageBox(LOGIN_SUCCESS, 'success')
+    this.props.commonActions.showMessageBox(LOGIN_SUCCESS, SUCCESS)
     this.props.history.push('/admin/dashboard')
   }
   inputUsername (e) {

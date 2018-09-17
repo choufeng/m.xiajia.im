@@ -33,7 +33,6 @@ export function fetchLogin(args = {}) {
         },
         // Use rejectHandler as the second argument so that render errors won't be caught.
         (err) => {
-          console.log('err')
           dispatch({
             type: HOME_FETCH_LOGIN_FAILURE,
             data: { error: err },

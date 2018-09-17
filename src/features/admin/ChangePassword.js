@@ -82,6 +82,7 @@ export class ChangePassword extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('state', state)
   return {
     admin: state.admin
   }
