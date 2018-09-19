@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import { Grid, TextField, Button, MenuItem } from '@material-ui/core'
 import {map, clone, isNil, assoc} from 'ramda';
-import { FAILURE } from '../../common/consts';
+import { FAILURE, ADD_SUCCESS, SUCCESS, SAVE_SUCCESS } from '../../common/consts';
 
 export class ManagerContentEdit extends Component {
   static propTypes = {
@@ -65,6 +65,7 @@ export class ManagerContentEdit extends Component {
   handleSaveUpdate() {
     // 保存要提供的是
     this.props.actions.fetchSaveManagerUpdate(this.state.item).then(() => {
+      this.props.showMessageBox(SAVE_SUCCESS, SUCCESS)
       this.props.actions.fetchManagerList().catch(() => {
         this.props.showMessageBox(`未能成功加载列表:${this.props.admin.fetchGroupListError}`, FAILURE)
       })
