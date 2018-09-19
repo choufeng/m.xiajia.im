@@ -32,7 +32,9 @@ const initialState = {
   saveNewManagerPending: false,
   saveNewManagerError: null,
   deleteManagerPending: false,
-  deleteManagerError: null
+  deleteManagerError: null,
+  fetchSaveManagerUpdatePending: false,
+  fetchSaveManagerUpdateError: null
 };
 
 export default initialState;

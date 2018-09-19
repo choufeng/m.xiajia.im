@@ -13,3 +13,4 @@ export { setActiveManager } from './setActiveManager';
 export { clearActiveManager } from './clearActiveManager';
 export { saveNewManager, dismissSaveNewManagerError } from './saveNewManager';
 export { deleteManager, dismissDeleteManagerError } from './deleteManager';
+export { fetchSaveManagerUpdate, dismissFetchSaveManagerUpdateError } from './fetchSaveManagerUpdate';

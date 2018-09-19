@@ -22,6 +22,7 @@ import { reducer as setActiveManagerReducer } from './setActiveManager';
 import { reducer as clearActiveManagerReducer } from './clearActiveManager';
 import { reducer as saveNewManagerReducer } from './saveNewManager';
 import { reducer as deleteManagerReducer } from './deleteManager';
+import { reducer as fetchSaveManagerUpdateReducer } from './fetchSaveManagerUpdate';
 
 const reducers = [
   setSideMenuReducer,
@@ -39,6 +40,7 @@ const reducers = [
   clearActiveManagerReducer,
   saveNewManagerReducer,
   deleteManagerReducer,
+  fetchSaveManagerUpdateReducer,
 ];
 
 export default function reducer(state = initialState, action) {
