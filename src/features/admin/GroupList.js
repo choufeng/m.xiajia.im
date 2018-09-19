@@ -7,6 +7,7 @@ import {showMessageBox} from '../common/redux/showMessageBox'
 import classNames from 'classnames';
 import {AddNewGroup} from './';
 import {LinearProgress} from '@material-ui/core'
+import { FAILURE } from '../../common/consts';
 export class GroupList extends Component {
   constructor(props) {
     super(props)
@@ -20,7 +21,7 @@ export class GroupList extends Component {
 
   componentDidMount() {
     this.props.actions.fetchGroupList().catch(() => {
-      this.props.showMessageBox(`未能成功加载列表:${this.props.admin.fetchGroupListError}`, 'success')
+      this.props.showMessageBox(`未能成功加载列表:${this.props.admin.fetchGroupListError}`, FAILURE)
     })
     this.props.actions.setGroupNodes()
   }

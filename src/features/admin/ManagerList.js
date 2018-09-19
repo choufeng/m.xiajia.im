@@ -6,7 +6,6 @@ import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions'
 import {LinearProgress} from '@material-ui/core'
 import classNames from 'classnames'
-import { has } from 'ramda';
 import { AddNewManager } from './';
 import { CANNOT_LOAD_LIST } from '../../common/consts';
 
@@ -23,7 +22,9 @@ export class ManagerList extends Component {
   }
 
   setActive (i) {
-    this.props.actions.setActiveManager(i)
+    this.props.actions.clearActiveManager().then(() => {
+      this.props.actions.setActiveManager(i)
+    })
   }
 
   isActive(id) {

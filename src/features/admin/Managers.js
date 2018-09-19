@@ -7,6 +7,7 @@ import {Grid} from '@material-ui/core'
 import {ManagerList} from './';
 import {ManagerContent} from './';
 import {not, isEmpty} from 'ramda';
+import { FAILURE } from '../../common/consts';
 
 export class Managers extends Component {
   static propTypes = {
@@ -16,6 +17,10 @@ export class Managers extends Component {
 
   componentDidMount() {
     this.props.actions.setSideSelected('人员管理')
+    this.props.actions.fetchGroupList().catch(() => {
+      this.props.showMessageBox(`未能成功加载列表:${this.props.admin.fetchGroupListError}`, FAILURE)
+    })
+
   }
 
   hasManagerContent(t) {

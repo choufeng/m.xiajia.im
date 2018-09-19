@@ -7,9 +7,15 @@ import {
 } from './constants';
 
 export function clearActiveManager() {
-  return {
-    type: ADMIN_CLEAR_ACTIVE_MANAGER,
-  };
+  return (dispatch) => {
+    const promise = new Promise((resolve, reject) => {
+      dispatch({
+        type: ADMIN_CLEAR_ACTIVE_MANAGER
+      })
+      resolve(true)
+    })
+    return promise
+  }
 }
 
 export function reducer(state, action) {

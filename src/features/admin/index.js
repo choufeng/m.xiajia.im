@@ -11,3 +11,5 @@ export { default as ManagerList } from './ManagerList';
 export { default as ManagerContent } from './ManagerContent';
 export { default as DeleteManager } from './DeleteManager';
 export { default as AddNewManager } from './AddNewManager';
+export { default as ManagerContentEdit } from './ManagerContentEdit';
+export { default as ResetPassword } from './ResetPassword';
