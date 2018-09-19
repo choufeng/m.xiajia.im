@@ -34,7 +34,9 @@ const initialState = {
   deleteManagerPending: false,
   deleteManagerError: null,
   fetchSaveManagerUpdatePending: false,
-  fetchSaveManagerUpdateError: null
+  fetchSaveManagerUpdateError: null,
+  fetchResetPasswordPending: false,
+  fetchResetPasswordError: null
 };
 
 export default initialState;

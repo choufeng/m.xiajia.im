@@ -14,3 +14,4 @@ export { clearActiveManager } from './clearActiveManager';
 export { saveNewManager, dismissSaveNewManagerError } from './saveNewManager';
 export { deleteManager, dismissDeleteManagerError } from './deleteManager';
 export { fetchSaveManagerUpdate, dismissFetchSaveManagerUpdateError } from './fetchSaveManagerUpdate';
+export { fetchResetPassword, dismissFetchResetPasswordError } from './fetchResetPassword';
