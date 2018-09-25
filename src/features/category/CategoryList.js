@@ -14,6 +14,23 @@ export class CategoryList extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+    this.a = this.a.bind(this)
+    this.b = this.b.bind(this)
+    this.c = this.c.bind(this)
+  }
+
+  a (leafData, chdIndex, expand) {
+    console.log('a', leafData, chdIndex, expand)
+  }
+
+  b (leafData, chdIndex, expand) {
+    console.log('b', leafData, chdIndex, expand)
+  }
+
+  c (leafData, expand) {
+    console.log('c', leafData, expand)
+    const {name} = leafData;
+    return (<b>{name}</b>);
   }
 
   render() {
@@ -26,7 +43,9 @@ export class CategoryList extends Component {
           valueName="id"
           childrenName="children"
           data={data}
-          expandFirst={true}
+          expandAll={true}
+          renderLabel={this.c}
+          requestChildrenData={this.b}
         ></MaterialUiTree>
       </div>
     )

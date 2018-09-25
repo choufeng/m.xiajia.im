@@ -22,13 +22,13 @@ export class DefaultPage extends Component {
     return (
       <div className="category-default-page">
         <Grid container>
-          <Grid item xs={5} className="category-default-page-left">
+          <Grid item xs={4} className="category-default-page-left">
             <RootCategorys></RootCategorys>
             <CategoryList></CategoryList>
             <AddCategory></AddCategory>
           </Grid>
-          <Grid item xs={4} className="category-default-page-content">
-          zhong
+          <Grid item xs={5} className="category-default-page-content">
+            中
           </Grid>
           <Grid item xs={3} className="category-default-page-right">
           you
