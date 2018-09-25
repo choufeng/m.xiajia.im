@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
+import MaterialUiTree from 'material-ui-tree';
 
 export class CategoryList extends Component {
   static propTypes = {
@@ -16,9 +17,17 @@ export class CategoryList extends Component {
   }
 
   render() {
+    const data = this.props.category.categoryTree;
     return (
       <div className="category-category-list">
-      分类列表
+        <MaterialUiTree
+          className="category-category-list-tree"
+          labelName="name"
+          valueName="id"
+          childrenName="children"
+          data={data}
+          expandFirst={true}
+        ></MaterialUiTree>
       </div>
     )
   }
