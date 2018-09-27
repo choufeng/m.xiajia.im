@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import { Grid, Select, MenuItem } from '@material-ui/core';
+import { sort } from 'ramda';
 
 export class RootCategorys extends Component {
   static propTypes = {
@@ -27,7 +28,7 @@ export class RootCategorys extends Component {
   }
 
   render() {
-    const list = this.props.category.rootCategoryList;
+    const list = sort((a, b) => a.sort - b.sort, this.props.category.rootCategoryList);
     console.log(list)
     return (
       <div className="category-root-categorys">
