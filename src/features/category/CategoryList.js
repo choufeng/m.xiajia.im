@@ -14,21 +14,28 @@ export class CategoryList extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.a = this.a.bind(this)
-    this.b = this.b.bind(this)
-    this.c = this.c.bind(this)
+    this.getTreeName = this.getTreeName.bind(this)
+    this.handleClickTree = this.handleClickTree.bind(this)
+    this.getActionsData = this.getActionsData.bind(this)
   }
 
-  a (leafData, chdIndex, expand) {
-    console.log('a', leafData, chdIndex, expand)
+  handleClickTree (data, chdIndex, expand) {
+    this.props.actions.setActiveCategory(data)
   }
 
-  b (leafData, chdIndex, expand) {
-    console.log('b', leafData, chdIndex, expand)
+  getActionsData(data, index, expand) {
+    console.log('getActionsData', data)
+    return [
+      {
+        label: '查看',
+        onClick: () => {
+          this.props.actions.setActiveCategory(data)
+        }
+      }
+    ]
   }
 
-  c (leafData, expand) {
-    console.log('c', leafData, expand)
+  getTreeName (leafData) {
     const {name} = leafData;
     return (<b>{name}</b>);
   }
@@ -44,8 +51,10 @@ export class CategoryList extends Component {
           childrenName="children"
           data={data}
           expandAll={true}
-          renderLabel={this.c}
-          requestChildrenData={this.b}
+          actionsAlignRight={true}
+          renderLabel={this.getTreeName}
+          getActionsData={this.getActionsData}
+          requestChildrenData={this.handleClickTree} 
         ></MaterialUiTree>
       </div>
     )

@@ -33,6 +33,9 @@ export class RootCategorys extends Component {
       <div className="category-root-categorys">
         <Grid container>
           <Grid item xs={12}>
+            <h3>分类显示</h3>
+          </Grid>
+          <Grid item xs={12}>
             <Select value={this.state.selectId} onChange={this.handleChangeRootCategory} placeholder="请选择根分类" className="category-root-categorys-select">
             {
               list.map((i) => {

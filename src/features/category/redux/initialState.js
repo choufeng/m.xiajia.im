@@ -12,6 +12,10 @@ const initialState = {
   fetchGetCategoryTreeBySelectedRootIdPending: false,
   fetchGetCategoryTreeBySelectedRootIdError: null,
   categoryTree: [],
+  activeCategory: {},
+  fetchGetRemoveRootCategoryPending: false,
+  fetchGetRemoveRootCategoryError: null,
+  removeRootCategory: {},
 };
 
 export default initialState;

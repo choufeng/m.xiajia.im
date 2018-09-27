@@ -9,10 +9,14 @@
 import initialState from './initialState';
 import { reducer as fetchGetRootCategoryListReducer } from './fetchGetRootCategoryList';
 import { reducer as fetchGetCategoryTreeBySelectedRootIdReducer } from './fetchGetCategoryTreeBySelectedRootId';
+import { reducer as setActiveCategoryReducer } from './setActiveCategory';
+import { reducer as fetchGetRemoveRootCategoryReducer } from './fetchGetRemoveRootCategory';
 
 const reducers = [
   fetchGetRootCategoryListReducer,
   fetchGetCategoryTreeBySelectedRootIdReducer,
+  setActiveCategoryReducer,
+  fetchGetRemoveRootCategoryReducer,
 ];
 
 export default function reducer(state = initialState, action) {

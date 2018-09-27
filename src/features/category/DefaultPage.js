@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import * as adminActions from '../admin/redux/actions';
 import { Grid } from '@material-ui/core';
-import {RootCategorys, CategoryList, AddCategory } from './';
+import {RootCategorys, CategoryList, AddCategory, CategoryEdit, DeleteCategory } from './';
+import { isEmpty, not } from 'ramda';
 
 export class DefaultPage extends Component {
   static propTypes = {
@@ -13,10 +14,26 @@ export class DefaultPage extends Component {
     actions: PropTypes.object.isRequired,
   };
 
+  constructor(props) {
+    super(props)
+    this.isShowDeleteCategory = this.isShowDeleteCategory.bind(this)
+  }
+
   componentDidMount () {
     this.props.adminActions.setSideSelected('分类管理')
     this.props.actions.fetchGetRootCategoryList();
+    this.props.actions.fetchGetRemoveRootCategory();
   }
+
+  isShowDeleteCategory () {
+    const tree = this.props.category.categoryTree;
+    const removeNode = this.props.category.removeRootCategory;
+    const activeCategory = this.props.category.activeCategory;
+    const result = (not(isEmpty(activeCategory)) && (tree.id !== removeNode.id))
+    console.log(result)
+    return result
+  }
+
 
   render() {
     return (
@@ -24,14 +41,20 @@ export class DefaultPage extends Component {
         <Grid container>
           <Grid item xs={4} className="category-default-page-left">
             <RootCategorys></RootCategorys>
-            <CategoryList></CategoryList>
+            {
+              isEmpty(this.props.category.categoryTree) || <CategoryList></CategoryList>
+            }
             <AddCategory></AddCategory>
           </Grid>
           <Grid item xs={5} className="category-default-page-content">
-            中
+          {
+            isEmpty(this.props.category.activeCategory) || <CategoryEdit></CategoryEdit>
+          }
           </Grid>
           <Grid item xs={3} className="category-default-page-right">
-          you
+          {
+            this.isShowDeleteCategory() && <DeleteCategory></DeleteCategory>
+          }
           </Grid>
         </Grid>
       </div>
