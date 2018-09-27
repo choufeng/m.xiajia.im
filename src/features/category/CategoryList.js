@@ -25,11 +25,19 @@ export class CategoryList extends Component {
 
   getActionsData(data, index, expand) {
     console.log('getActionsData', data)
+    console.log('index', index)
+    console.log('expand', expand)
     return [
       {
         label: '查看',
         onClick: () => {
-          this.props.actions.setActiveCategory(data)
+          const actions = this.props.actions
+          actions.clearActiveCategory().then(() => {
+            actions.fetchGetActiveCategoryParent(data.id).then(() => {
+              actions.setActiveCategory(data)
+            })
+            actions.fetchGetActiveCategoryChildren(data.id)
+          })
         }
       }
     ]

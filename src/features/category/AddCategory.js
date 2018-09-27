@@ -14,7 +14,7 @@ export class AddCategory extends Component {
   render() {
     return (
       <div className="category-add-category">
-        <Button variant="contained" color="primary">创建根分类</Button>
+        <Button variant="contained" color="primary">创建新分类</Button>
       </div>
     );
   }

@@ -11,12 +11,20 @@ import { reducer as fetchGetRootCategoryListReducer } from './fetchGetRootCatego
 import { reducer as fetchGetCategoryTreeBySelectedRootIdReducer } from './fetchGetCategoryTreeBySelectedRootId';
 import { reducer as setActiveCategoryReducer } from './setActiveCategory';
 import { reducer as fetchGetRemoveRootCategoryReducer } from './fetchGetRemoveRootCategory';
+import { reducer as fetchGetCategoryListBySelectedRootIdReducer } from './fetchGetCategoryListBySelectedRootId';
+import { reducer as fetchGetActiveCategoryParentReducer } from './fetchGetActiveCategoryParent';
+import { reducer as clearActiveCategoryReducer } from './clearActiveCategory';
+import { reducer as fetchGetActiveCategoryChildrenReducer } from './fetchGetActiveCategoryChildren';
 
 const reducers = [
   fetchGetRootCategoryListReducer,
   fetchGetCategoryTreeBySelectedRootIdReducer,
   setActiveCategoryReducer,
   fetchGetRemoveRootCategoryReducer,
+  fetchGetCategoryListBySelectedRootIdReducer,
+  fetchGetActiveCategoryParentReducer,
+  clearActiveCategoryReducer,
+  fetchGetActiveCategoryChildrenReducer,
 ];
 
 export default function reducer(state = initialState, action) {

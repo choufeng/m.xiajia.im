@@ -12,10 +12,19 @@ const initialState = {
   fetchGetCategoryTreeBySelectedRootIdPending: false,
   fetchGetCategoryTreeBySelectedRootIdError: null,
   categoryTree: [],
-  activeCategory: {},
+  categoryList: [],
+  activeCategory: [],
+  activeCategoryParent: [],
+  activeCategoryChildren: [],
   fetchGetRemoveRootCategoryPending: false,
   fetchGetRemoveRootCategoryError: null,
   removeRootCategory: {},
+  fetchGetCategoryListBySelectedRootIdPending: false,
+  fetchGetCategoryListBySelectedRootIdError: null,
+  fetchGetActiveCategoryParentPending: false,
+  fetchGetActiveCategoryParentError: null,
+  fetchGetActiveCategoryChildrenPending: false,
+  fetchGetActiveCategoryChildrenError: null,
 };
 
 export default initialState;
