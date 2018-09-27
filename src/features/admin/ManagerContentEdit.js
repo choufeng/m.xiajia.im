@@ -7,7 +7,30 @@ import * as commonActions from '../common/redux/actions';
 import { Grid, TextField, Button, MenuItem } from '@material-ui/core'
 import {map, clone, isNil, assoc} from 'ramda';
 import { FAILURE, SUCCESS, SAVE_SUCCESS } from '../../common/consts';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: '80%'
+  },
+  button: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+  },
+  dense: {
+    marginTop: 16,
+  },
+  menu: {
+    width: 200,
+  },
+});
 export class ManagerContentEdit extends Component {
   static propTypes = {
     admin: PropTypes.object.isRequired,
@@ -74,17 +97,18 @@ export class ManagerContentEdit extends Component {
   }
   render() {
     const groups = this.props.admin.groupList;
+    const { classes } = this.props
     return (
       <div className="admin-manager-content-edit">
         <Grid container>
           <Grid item xs={12} className="admin-manager-content-edit-item">
-              <TextField onChange={this.handleChangeName} value={this.state.item.username} label="姓名" className="admin-manager-content-edit-form" />
+              <TextField onChange={this.handleChangeName} value={this.state.item.username} label="姓名" className={classes.textField} variant="outlined"/>
           </Grid>
           <Grid item xs={12} className="admin-manager-content-edit-item">
-              <TextField onChange={this.handleChangePhone} value={this.state.item.phone} label="手机号" className="admin-manager-content-edit-form" />
+              <TextField onChange={this.handleChangePhone} value={this.state.item.phone} label="手机号" className={classes.textField} variant="outlined" />
           </Grid>
           <Grid item xs={12} className="admin-manager-content-edit-item">
-              <TextField select label="权限组" value={this.getGroupId(this.state.item.group)} onChange={this.handleChangeGroup} className="admin-manager-content-edit-form">
+              <TextField select label="权限组" value={this.getGroupId(this.state.item.group)} onChange={this.handleChangeGroup} className={classes.textField} variant="outlined">
               {
                 map((item) => {
                   return (<MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>)
@@ -93,7 +117,7 @@ export class ManagerContentEdit extends Component {
               </TextField>
           </Grid>
           <Grid item xs={12} className="admin-manager-content-edit-item">
-            <Button variant="contained" color="primary" onClick={this.handleSaveUpdate}>保 存</Button>
+            <Button variant="contained" color="primary" onClick={this.handleSaveUpdate} className={classes.button}>保 存</Button>
           </Grid>
         </Grid>
       </div>
@@ -119,4 +143,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ManagerContentEdit);
+)(withStyles(styles)(ManagerContentEdit));
