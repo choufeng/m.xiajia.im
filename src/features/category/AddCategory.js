@@ -30,6 +30,7 @@ export class AddCategory extends Component {
     this.handleCancelDialog = this.handleCancelDialog.bind(this)
     this.handleOpenDialog = this.handleOpenDialog.bind(this)
     this.handleChangeName = this.handleChangeName.bind(this)
+    this.handleChangeSort = this.handleChangeSort.bind(this)
     this.handleChangeDescription = this.handleChangeDescription.bind(this)
     this.handleSaveData = this.handleSaveData.bind(this)
     this.handleCreateRootCategory = this.handleCreateRootCategory.bind(this)
