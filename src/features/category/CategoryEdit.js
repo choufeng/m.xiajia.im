@@ -45,12 +45,14 @@ export class CategoryEdit extends Component {
       id: null,
       name: '',
       description: '',
+      sort: 0,
       parent:null
     }
     this.getParent = this.getParent.bind(this)
     this.handleChangeName = this.handleChangeName.bind(this)
     this.handleChangeDescription = this.handleChangeDescription.bind(this)
     this.handleChangeParent = this.handleChangeParent.bind(this)
+    this.handleChangeSort = this.handleChangeSort.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
   }
 
@@ -77,6 +79,7 @@ export class CategoryEdit extends Component {
     this.setState({
       name: data.name,
       id: data.id,
+      sort: data.sort,
       description: data.description,
       parent: parent.id
     })
@@ -86,6 +89,12 @@ export class CategoryEdit extends Component {
   handleChangeName(e) {
     this.setState({
       name: e.target.value
+    })
+  }
+
+  handleChangeSort(e) {
+    this.setState({
+      sort: e.target.value
     })
   }
 
@@ -116,10 +125,7 @@ export class CategoryEdit extends Component {
 
   render() {
     const { classes } = this.props
-    const selectList = difference(this.props.category.categoryList, this.props.category.activeCategoryChildren)
-    console.log('categorylist', this.props.category.categoryList)
-    console.log('activeCategoryChildren', this.props.category.activeCategoryChildren)
-    console.log(this.state.parent)
+    const selectList = difference(difference(this.props.category.categoryList, this.props.category.activeCategoryChildren), [this.props.category.removeRootCategory])
     return (
       <div className="category-category-edit">
         <Grid container>
@@ -144,6 +150,17 @@ export class CategoryEdit extends Component {
               margin="normal"
               variant="outlined"
               onChange={this.handleChangeDescription}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              type="number"
+              label="排序号: 大号靠前"
+              className={classes.textField}
+              value={this.state.sort}
+              margin="normal"
+              variant="outlined"
+              onChange={this.handleChangeSort}
             />
           </Grid>
           {

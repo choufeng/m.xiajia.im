@@ -23,7 +23,8 @@ export class AddCategory extends Component {
       modal: {
         name: '',
         description: '',
-        parent: 0
+        parent: 0,
+        sort: 0
       }
     }
     this.handleCancelDialog = this.handleCancelDialog.bind(this)
@@ -65,6 +66,12 @@ export class AddCategory extends Component {
   handleChangeName(e) {
     this.setState({
       modal: assoc('name', e.target.value, this.state.modal)
+    })
+  }
+  
+  handleChangeSort(e) {
+    this.setState({
+      modal: assoc('sort', e.target.value, this.state.modal)
     })
   }
 
@@ -112,6 +119,7 @@ export class AddCategory extends Component {
             </DialogContentText>
             <TextField margin="normal" value={this.state.modal.name} onChange={this.handleChangeName} ref="name" id="name" label="输入分类名称" type="text" fullWidth autoFocus />
             <TextField margin="normal" value={this.state.modal.description} onChange={this.handleChangeDescription} ref="description" id="description" label="输入对分类的简单描述" type="text" fullWidth />
+            <TextField margin="normal" value={this.state.modal.sort} onChange={this.handleChangeSort} ref="sort" id="sort" label="排序号: 大号靠前" type="number" fullWidth autoFocus />
             <TextField margin="normal" value={this.state.modal.parent} select ref="parent" label="上级分类" fullWidth>
               <MenuItem value={ac.id}>{ac.name}</MenuItem>
             </TextField>

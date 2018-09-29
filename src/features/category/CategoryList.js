@@ -41,8 +41,8 @@ export class CategoryList extends Component {
   }
 
   getTreeName (leafData) {
-    const {name} = leafData;
-    return (<b>{name}</b>);
+    const {name, sort} = leafData;
+    return (<b>{name} <i className="category-category-list-i">{sort}</i></b>);
   }
 
   render() {
