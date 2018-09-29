@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
+import * as commonActions from '../common/redux/actions';
 import { TextField, Grid, Button, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { last, init, map, isEmpty, difference, not } from 'ramda';
+import * as R from 'ramda';
+import { SUCCESS, SAVE_SUCCESS } from '../../common/consts';
 
 const styles = theme => ({
   container: {
@@ -42,11 +45,31 @@ export class CategoryEdit extends Component {
       id: null,
       name: '',
       description: '',
-      parent:''
+      parent:null
     }
     this.getParent = this.getParent.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChangeName = this.handleChangeName.bind(this)
+    this.handleChangeDescription = this.handleChangeDescription.bind(this)
+    this.handleChangeParent = this.handleChangeParent.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
+
+  // getCategoryList() {
+  //   const l = this.props.category.categoryTree
+  //   const list = this._returnChildrenTreeToList(l, 0, [])
+  //   console.log('深度合并的list', list)
+  // }
+
+  // _returnChildrenTreeToList (childrenList, deepLevel, reduceList) {
+  //   R.reduce((a, v) => {
+  //     let list = []
+  //     list = R.append(v, a)
+  //     if (R.has('children', v)) {
+  //       list = R.append(this._returnChildrenTreeToList(v.children, R.inc(deepLevel), reduceList), a)
+  //     }
+  //     return R.union(a, list)
+  //   }, reduceList, childrenList)
+  // }
 
   componentDidMount() {
     const data = this.props.category.activeCategory
@@ -57,11 +80,33 @@ export class CategoryEdit extends Component {
       description: data.description,
       parent: parent.id
     })
+    // this.getCategoryList()
   }
 
-  handleChange(e) {
+  handleChangeName(e) {
+    this.setState({
+      name: e.target.value
+    })
+  }
+
+  handleChangeDescription(e) {
+    this.setState({
+      description: e.target.value
+    })
+  }
+  handleChangeParent(e) {
+    console.log(e.target.value)
     this.setState({
       parent: e.target.value
+    })
+  }
+
+  handleUpdate() {
+    this.props.actions.fetchUpdateCategory({id: this.state.id, data: this.state}).then(() => {
+      this.props.commonActions.showMessageBox(SAVE_SUCCESS, SUCCESS)
+      this.props.actions.fetchGetCategoryTreeBySelectedRootId(this.props.category.selectRootCategory)
+      this.props.actions.fetchGetCategoryListBySelectedRootId(this.props.category.selectRootCategory);
+      this.props.actions.fetchGetActiveCategoryChildren(this.props.category.activeCategory.id)
     })
   }
 
@@ -72,7 +117,9 @@ export class CategoryEdit extends Component {
   render() {
     const { classes } = this.props
     const selectList = difference(this.props.category.categoryList, this.props.category.activeCategoryChildren)
-    // const selectList = this.props.category.categoryList
+    console.log('categorylist', this.props.category.categoryList)
+    console.log('activeCategoryChildren', this.props.category.activeCategoryChildren)
+    console.log(this.state.parent)
     return (
       <div className="category-category-edit">
         <Grid container>
@@ -86,6 +133,7 @@ export class CategoryEdit extends Component {
               margin="normal"
               className={classes.textField}
               value={this.state.name}
+              onChange={this.handleChangeName}
             ></TextField>
           </Grid>
           <Grid item xs={12}>
@@ -95,6 +143,7 @@ export class CategoryEdit extends Component {
               value={this.state.description}
               margin="normal"
               variant="outlined"
+              onChange={this.handleChangeDescription}
             />
           </Grid>
           {
@@ -107,7 +156,7 @@ export class CategoryEdit extends Component {
                   value={this.state.parent}
                   margin="normal"
                   variant="outlined"
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeParent}
                 >
                 {
                   map(i => <MenuItem key={i.id} value={i.id}>{i.name}</MenuItem>)(selectList)
@@ -116,7 +165,7 @@ export class CategoryEdit extends Component {
               </Grid>
           }
           <Grid item xs={12}>
-            <Button variant="contained" className={classes.button} color="primary">保 存</Button>
+            <Button variant="contained" onClick={this.handleUpdate} className={classes.button} color="primary">保 存</Button>
           </Grid>
         </Grid>
       </div>
@@ -134,7 +183,8 @@ function mapStateToProps(state) {
 /* istanbul ignore next */
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...actions }, dispatch)
+    actions: bindActionCreators({ ...actions }, dispatch),
+    commonActions: bindActionCreators({ ...commonActions }, dispatch),
   };
 }
 

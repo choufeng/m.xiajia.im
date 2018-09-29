@@ -10,7 +10,6 @@ export default class RenderGroupNodesList extends Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    console.log('list', props.list)
     this.state = {
       list: this.props.list
     }
@@ -22,7 +21,6 @@ export default class RenderGroupNodesList extends Component {
     this.setState({
       list: update(index, data, this.state.list)
     })
-    console.log('list', this.state.list)
     this.props.valueChanged(this.state.list[index]['nodekey'])
   }
 

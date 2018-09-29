@@ -30,7 +30,6 @@ export class DefaultPage extends Component {
     const removeNode = this.props.category.removeRootCategory;
     const activeCategory = this.props.category.activeCategory;
     const result = (not(isEmpty(activeCategory)) && (tree.id !== removeNode.id))
-    console.log(result)
     return result
   }
 

@@ -24,13 +24,14 @@ export class RootCategorys extends Component {
     this.setState({
       selectId: e.target.value
     });
+    this.props.actions.clearActiveCategory()
+    this.props.actions.setSelectRootCategory(e.target.value)
     this.props.actions.fetchGetCategoryTreeBySelectedRootId(e.target.value);
     this.props.actions.fetchGetCategoryListBySelectedRootId(e.target.value);
   }
 
   render() {
     const list = sortWith([ascend(prop('sort'))], this.props.category.rootCategoryList);
-    console.log(list)
     return (
       <div className="category-root-categorys">
         <Grid container>

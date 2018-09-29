@@ -24,9 +24,6 @@ export class CategoryList extends Component {
   }
 
   getActionsData(data, index, expand) {
-    console.log('getActionsData', data)
-    console.log('index', index)
-    console.log('expand', expand)
     return [
       {
         label: '查看',

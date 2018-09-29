@@ -25,6 +25,13 @@ const initialState = {
   fetchGetActiveCategoryParentError: null,
   fetchGetActiveCategoryChildrenPending: false,
   fetchGetActiveCategoryChildrenError: null,
+  fetchUpdateCategoryPending: false,
+  fetchUpdateCategoryError: null,
+  selectRootCategory: null,
+  fetchAddCategoryPending: false,
+  fetchAddCategoryError: null,
+  fetchRemoveCategoryPending: false,
+  fetchRemoveCategoryError: null,
 };
 
 export default initialState;

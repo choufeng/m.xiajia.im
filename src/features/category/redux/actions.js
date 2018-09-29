@@ -6,3 +6,7 @@ export { fetchGetCategoryListBySelectedRootId, dismissFetchGetCategoryListBySele
 export { fetchGetActiveCategoryParent, dismissFetchGetActiveCategoryParentError } from './fetchGetActiveCategoryParent';
 export { clearActiveCategory } from './clearActiveCategory';
 export { fetchGetActiveCategoryChildren, dismissFetchGetActiveCategoryChildrenError } from './fetchGetActiveCategoryChildren';
+export { fetchUpdateCategory, dismissFetchUpdateCategoryError } from './fetchUpdateCategory';
+export { setSelectRootCategory } from './setSelectRootCategory';
+export { fetchAddCategory, dismissFetchAddCategoryError } from './fetchAddCategory';
+export { fetchRemoveCategory, dismissFetchRemoveCategoryError } from './fetchRemoveCategory';

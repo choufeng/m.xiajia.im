@@ -46,7 +46,6 @@ export class DeleteGroup extends Component {
 
   async handleDeleteGroup() {
     // 1. 确认输入是否正确， 正确则执行delete， 得到反馈结果
-    console.log()
     if (this.isRightConfirm(this.state.confirm, this.props.admin.activeGroup.name)) {
       await this.props.actions.deleteGroup({id: this.props.admin.activeGroup.id})
       if (this.props.admin.deleteGroupError) {

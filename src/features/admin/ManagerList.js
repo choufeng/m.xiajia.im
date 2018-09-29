@@ -34,7 +34,6 @@ export class ManagerList extends Component {
   componentDidMount() {
     this.props.actions.fetchManagerList().catch(() => {
       this.props.commonActions.showMessageBox(`${CANNOT_LOAD_LIST}: ${this.props.admin.fetchManagerListError}`, 'error')
-      console.log(this.props.admin.fetchManagerListError)
     })
   }
 

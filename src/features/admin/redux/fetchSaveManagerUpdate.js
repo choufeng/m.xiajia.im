@@ -9,7 +9,6 @@ import api from '../../../common/api'
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
 export function fetchSaveManagerUpdate(args = {}) {
-  console.log('srgs', args)
   return (dispatch) => { // optionally you can have getState as the second argument
     dispatch({
       type: ADMIN_FETCH_SAVE_MANAGER_UPDATE_BEGIN,

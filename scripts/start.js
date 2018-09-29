@@ -110,7 +110,6 @@ startRekitStudio(studioPort).then(() =>
     })
     .catch(err => {
       if (err && err.message) {
-        console.log(err.message);
       }
       process.exit(1);
     })
