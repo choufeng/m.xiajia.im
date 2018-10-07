@@ -7,7 +7,10 @@ import { Grid, TextField, Paper, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { EditorForm } from './';
 import * as R from 'ramda';
-
+import verifyForm from '../../common/verifyForm';
+import * as commonActions from '../common/redux/actions';
+import { ADD_SUCCESS, SUCCESS, FAILURE } from '../../common/consts';
+import getErrorMessage from '../../common/getErrorMessage';
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
@@ -36,14 +39,23 @@ export class ArticleForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      formStatus: {
+      verify: {
         title: {
+          verify: {
+            isRequired: true,
+            isEmail: true,
+            max: 50
+          },
           status: false,
-          errorMsg: ''
+          err: ''
         },
         link: {
+          verify: {
+            isRequired: false,
+            max: 200,
+          },
           status: false,
-          erroeMsg: ''
+          err: ''
         }
       },
       modal: {
@@ -54,15 +66,40 @@ export class ArticleForm extends Component {
       }
     }
     this.handleChangeValue = this.handleChangeValue.bind(this)
+    this.handleSaveArticle = this.handleSaveArticle.bind(this)
+    this.clearModal = this.clearModal.bind(this)
+    // this.verifyForm = this.verifyForm.bind(this)
   }
 
   handleChangeValue(key, value) {
+    // let resul = verifyForm.getMessage(value, this.state.verify[key].verify)
+    // console.log('verifyForm', resul)
+    // this.verifyForm(key, value)
     // 设定
     this.setState({
       modal: R.assoc(key, value, this.state.modal)
     })
   }
 
+  // verifyForm (key, value) {
+  //   const {verify} = this.state
+  //   const node = verify[key]
+  //   // 对节点验证规则逐一处理
+  //   const _item = (a, v) => {
+  //     console.log('v', v)
+  //     switch (v[0]) {
+  //       case 'isRequired':
+          
+  //         break;
+      
+  //       default:
+  //         break;
+  //     }
+  //     return a
+  //   }
+  //   const newVerify = R.reduce(_item, node, R.toPairs(node.verify))
+  //   console.log('node', newVerify)
+  // }
 
   computedButtonStatus (formStatus) {
     // 取每个节点的status， 并集， 得到TF
@@ -73,13 +110,33 @@ export class ArticleForm extends Component {
    * 保存逻辑
    */
   handleSaveArticle() {
-    const {modal} = this.state.modal
-    const result = R.isNil(modal.id) ? '创建' : '编辑保存'
+    const {modal} = this.state
+    this.props.actions.fetchSaveArticle(modal).then(() => {
+      this.props.actions.fetchGetArticleList()
+      // success
+      this.props.commonActions.showMessageBox(ADD_SUCCESS, SUCCESS)
+      this.clearModal()
+      this.props.onClose()
+    }).catch(() => {
+      // failure
+      this.props.commonActions.showMessageBox(getErrorMessage(this.props.article.fetchSaveArticleError), FAILURE)
+    })
+  }
+
+  clearModal () {
+    this.setState({
+      modal: {
+        id: null,
+        title: '',
+        link: '',
+        content: ''
+      }
+    })
   }
 
   render() {
     const { classes } = this.props
-    const { modal, errorStatus} = this.state
+    const { modal, verify} = this.state
     return (
       <div className="article-article-form">
         <Grid container>
@@ -88,7 +145,7 @@ export class ArticleForm extends Component {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              error={errorStatus.title}
+              error={verify.title.status}
               label="文章标题"
               variant="outlined"
               margin="normal"
@@ -139,7 +196,8 @@ function mapStateToProps(state) {
 /* istanbul ignore next */
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...actions }, dispatch)
+    actions: bindActionCreators({ ...actions }, dispatch),
+    commonActions: bindActionCreators({ ...commonActions }, dispatch),
   };
 }
 

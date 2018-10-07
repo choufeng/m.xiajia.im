@@ -6,6 +6,16 @@
 
 // NOTE: initialState constant is necessary so that Rekit could auto add initial state when creating async actions.
 const initialState = {
+  fetchSaveArticlePending: false,
+  fetchSaveArticleError: null,
+  fetchGetArticleListPending: false,
+  fetchGetArticleListError: null,
+  articleList: [],
+  fetchGetArticleCountPending: false,
+  fetchGetArticleCountError: null,
+  articleCount: 0,
+  articleListPage: 0,
+  articleListLimit: 15,
 };
 
 export default initialState;
