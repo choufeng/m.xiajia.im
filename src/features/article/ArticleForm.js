@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import { Grid, TextField, Paper, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { EditorForm } from './';
+import { EditorForm, CategorySelect } from './';
 import * as R from 'ramda';
 import verifyForm from '../../common/verifyForm';
 import * as commonActions from '../common/redux/actions';
@@ -21,7 +21,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: '98%',
-    minHeight: '40%'
+    minHeight: '35%'
   },
   buttonField: {
     marginLeft: theme.spacing.unit,
@@ -62,12 +62,14 @@ export class ArticleForm extends Component {
         id: null,
         title: '',
         link: '',
-        content: '内容'
+        content: '内容',
+        categorys: []
       }
     }
     this.handleChangeValue = this.handleChangeValue.bind(this)
     this.handleSaveArticle = this.handleSaveArticle.bind(this)
     this.clearModal = this.clearModal.bind(this)
+    this.setData = this.setData.bind(this)
     // this.verifyForm = this.verifyForm.bind(this)
   }
 
@@ -107,12 +109,28 @@ export class ArticleForm extends Component {
   }
 
   /**
+   * 在提交数据前对数据进行处理
+   * 1. 实现对categorys的数据整理
+   */
+  setData (d) {
+    // PlanA
+    // const _item = (a, v) => {
+    //   const item = R.find(R.propEq('id', v))(this.props.category.categoryTree)
+    //   return R.isNil(item) ? a : R.append(item, a)
+    // }
+    // const categorys = R.reduce(_item, [], d.categorys)
+    // return R.assoc('categorys', categorys, d)
+    return d
+  }
+
+  /**
    * 保存逻辑
    */
   handleSaveArticle() {
-    const {modal} = this.state
+    const modal = this.setData(this.state.modal)
     this.props.actions.fetchSaveArticle(modal).then(() => {
       this.props.actions.fetchGetArticleList()
+      this.props.actions.fetchGetArticleCount()
       // success
       this.props.commonActions.showMessageBox(ADD_SUCCESS, SUCCESS)
       this.clearModal()
@@ -129,7 +147,8 @@ export class ArticleForm extends Component {
         id: null,
         title: '',
         link: '',
-        content: ''
+        content: '',
+        categorys: []
       }
     })
   }
@@ -137,17 +156,18 @@ export class ArticleForm extends Component {
   render() {
     const { classes } = this.props
     const { modal, verify} = this.state
+    console.log('modal category is:', modal)
     return (
       <div className="article-article-form">
         <Grid container>
-          <Grid item xs={12}>
-            <h3>内容管理</h3>
+          <Grid item xs={12} className="article-article-form-title">
+            <h3>内容管理{`{${R.isNil(modal.id) ? 'New' : modal.id}}`}</h3>
           </Grid>
           <Grid item xs={12}>
             <TextField
               error={verify.title.status}
               label="文章标题"
-              variant="outlined"
+              placeholder="不大于50个字，必填"
               margin="normal"
               className={classes.textField}
               value={modal.title}
@@ -157,12 +177,14 @@ export class ArticleForm extends Component {
           <Grid item xs={12}>
             <TextField
               label="链接地址"
-              variant="outlined"
               margin="normal"
               className={classes.textField}
               value={modal.link}
               onChange={e => this.handleChangeValue('link', e.target.value)}
             ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <CategorySelect selectValue={modal.categorys} classes={classes.textField} onChangeValue={this.handleChangeValue}/>
           </Grid>
           <Grid item xs={12} className={classes.contentField}>
             <Paper>
@@ -176,9 +198,10 @@ export class ArticleForm extends Component {
             <Button
               variant="contained"
               color="primary"
+              size="large"
               className={classes.buttonField}
               onClick={this.handleSaveArticle}
-            >保存</Button>
+            >保 存</Button>
           </Grid>
         </Grid>
       </div>
@@ -190,6 +213,7 @@ export class ArticleForm extends Component {
 function mapStateToProps(state) {
   return {
     article: state.article,
+    category: state.category,
   };
 }
 

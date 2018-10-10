@@ -1,3 +1,6 @@
+// category 的id需要和数据库对应
+export const CATEGORY_DELETE_ID = 1
+export const CATEGORY_ARTICLE_ID = 2
 export const SUCCESS = 'success'
 export const FAILURE = 'error'
 export const LOGIN_SUCCESS = '登录成功！'

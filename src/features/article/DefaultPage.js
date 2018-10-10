@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-import * as adminActions from '../admin/redux/actions';
+import { setSideSelected } from '../admin/redux/actions';
+import { fetchGetCategoryTreeBySelectedRootId } from '../category/redux/actions'
 import { Grid, Button } from '@material-ui/core';
 import { ArticleTable, ArticleForm } from './';
+import { CATEGORY_ARTICLE_ID } from '../../common/consts';
 
 export class DefaultPage extends Component {
   static propTypes = {
@@ -52,9 +54,11 @@ export class DefaultPage extends Component {
   }
 
   componentDidMount () {
-    this.props.adminActions.setSideSelected('文章管理')
-    this.props.actions.fetchGetArticleList()
-    this.props.actions.fetchGetArticleCount()
+    const { actions } = this.props
+    actions.setSideSelected('文章管理')
+    actions.fetchGetArticleList()
+    actions.fetchGetArticleCount()
+    actions.fetchGetCategoryTreeBySelectedRootId(CATEGORY_ARTICLE_ID)
   }
 
   render() {
@@ -63,12 +67,12 @@ export class DefaultPage extends Component {
         <Grid container>
           <Grid item xs={5} className="article-default-page-left">
             <Grid container>
+              <Grid item xs={12} className="article-default-page-add">
+                <Button variant="contained" color={"primary"} onClick={this.handleOpenForm} >添加新文章</Button>
+              </Grid>
               <Grid item xs={12} className="article-default-page-search"></Grid>
               <Grid item xs={12} className="article-default-page-table">
                 <ArticleTable onEditArticle={this.handleSetDataAndShowForm}></ArticleTable>
-              </Grid>
-              <Grid item xs={12} className="article-default-page-add">
-                <Button variant="contained" color={"primary"} onClick={this.handleOpenForm} >添加新文章</Button>
               </Grid>
             </Grid>
           </Grid>
@@ -91,8 +95,7 @@ function mapStateToProps(state) {
 /* istanbul ignore next */
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...actions }, dispatch),
-    adminActions: bindActionCreators({ ...adminActions }, dispatch),
+    actions: bindActionCreators({ ...actions, fetchGetCategoryTreeBySelectedRootId, setSideSelected }, dispatch),
   };
 }
 

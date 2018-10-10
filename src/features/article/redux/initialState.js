@@ -15,7 +15,7 @@ const initialState = {
   fetchGetArticleCountError: null,
   articleCount: 0,
   articleListPage: 0,
-  articleListLimit: 15,
+  articleListLimit: 10,
 };
 
 export default initialState;
