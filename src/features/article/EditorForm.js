@@ -14,6 +14,25 @@ export default class EditorForm extends Component {
     this.handleChangeContent = this.handleChangeContent.bind(this)
   }
 
+  shouldComponentUpdate() {
+    return true
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState((prveState, nextProps) => {
+      return {
+          content: nextProps.content
+      }
+    })
+  }
+
+  componentWillMount() {
+    this.setState((prveState, props) => {
+      return {
+          content: props.content
+      }
+    })
+  }
 
   handleChangeContent(value) {
     this.props.onContentChange(value)
@@ -24,7 +43,7 @@ export default class EditorForm extends Component {
     return (
       <div className="article-editor-form">
         <Milk
-          value={this.props.content}
+          value={this.state.content}
           onChange={this.handleChangeContent}
           style={{width: "100%"}}
         />

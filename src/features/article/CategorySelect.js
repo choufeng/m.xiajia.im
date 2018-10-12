@@ -35,11 +35,9 @@ export class CategorySelect extends Component {
   }
 
   setCategoryList(node) {
-    console.log('我要setState')
     this.setState(preState => ({
       list: R.append(node, preState.list)
     }))
-    console.log(`now`, this.state.list)
   }
 
   setPrev(item, level) {
@@ -52,12 +50,24 @@ export class CategorySelect extends Component {
     R.map(item => this.setItemToList(item, level + 2), item.children)
   }
 
-  componentDidMount() {
+  shouldComponentUpdate() {
+    return true
+  }
+
+  componentWillMount() {
     this.setItemToList(this.props.category.categoryTree)
-    console.log('pro select value is :', this.props.selectValue, typeof(this.props.selectValue))
-    // this.setState({
-    //   select: this.props.selectValue
-    // })
+    const selectList = R.reduce((a, v) => R.append(v.id, a), [], this.props.selectValue)
+    this.setState({
+      select: selectList
+    })
+  }
+
+  componentWillReceiveProps() {
+    this.setState((prveState, props) => {
+      return {
+        select: R.reduce((a, v) => R.append(v.id, a), [], props.selectValue)
+      }
+    })
   }
 
   handleChangeValue(e) {
@@ -87,7 +97,6 @@ export class CategorySelect extends Component {
           value={select}
           variant="outlined"
           className={classes}
-          margin="normal"
           MenuProps={MenuProps}
           input={<Input id="select-input" />}
           onChange={this.handleChangeValue}

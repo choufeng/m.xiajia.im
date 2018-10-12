@@ -6,7 +6,11 @@ import * as actions from './redux/actions';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import classNames from 'classnames';
+import { Button } from '@material-ui/core';
 
+const action = (
+  <Button>X</Button>
+)
 export class ShowMessage extends Component {
   constructor(props) {
     super(props)
@@ -24,7 +28,7 @@ export class ShowMessage extends Component {
   render() {
     return (
       <div className="common-show-message">
-        <Snackbar autoHideDuration={5000} onClose={this.onClose} anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={this.props.common.messageOpenStatus} >
+        <Snackbar autoHideDuration={5000} onClose={this.onClose} anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={this.props.common.messageOpenStatus} action={action} >
           <SnackbarContent className={classNames(this.props.common.messageType)} message={this.props.common.message} />
         </Snackbar>
       </div>

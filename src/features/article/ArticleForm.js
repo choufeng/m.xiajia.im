@@ -73,6 +73,25 @@ export class ArticleForm extends Component {
     // this.verifyForm = this.verifyForm.bind(this)
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    return R.not(R.equals(nextProps.data.id, this.props.data.id))
+  }
+
+  componentWillReceiveProps (nextProp) {
+    this.setState((prveState, props) => {
+      console.log('new info: ', props)
+      return {
+        modal: R.clone(props.data)
+      }
+    })
+  }
+
+  componentWillMount() {
+    this.setState(() => ({
+      modal: R.clone(this.props.data)
+    }))
+  }
+
   handleChangeValue(key, value) {
     // let resul = verifyForm.getMessage(value, this.state.verify[key].verify)
     // console.log('verifyForm', resul)
@@ -168,7 +187,6 @@ export class ArticleForm extends Component {
               error={verify.title.status}
               label="文章标题"
               placeholder="不大于50个字，必填"
-              margin="normal"
               className={classes.textField}
               value={modal.title}
               onChange={e => this.handleChangeValue('title', e.target.value)}
@@ -177,7 +195,6 @@ export class ArticleForm extends Component {
           <Grid item xs={12}>
             <TextField
               label="链接地址"
-              margin="normal"
               className={classes.textField}
               value={modal.link}
               onChange={e => this.handleChangeValue('link', e.target.value)}
@@ -195,6 +212,12 @@ export class ArticleForm extends Component {
             </Paper>
           </Grid>
           <Grid item xs={12} className="article-article-form-button">
+            <Button
+              variant="contained"
+              size="large"
+              className={classes.buttonField}
+              onClick={this.props.onClose}
+            >关闭</Button>
             <Button
               variant="contained"
               color="primary"

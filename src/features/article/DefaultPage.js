@@ -33,24 +33,23 @@ export class DefaultPage extends Component {
   }
 
   handleOpenForm () {
-    console.log('open')
     this.setState({
       showForm: true
     })
   }
 
   handleCloseForm() {
-    console.log('close')
     this.setState({
       showForm: false
     })
   }
 
   handleSetDataAndShowForm(data) {
+    this.handleCloseForm()
     this.setState({
       modal: data
     })
-    // this.handleOpenForm()
+    this.handleOpenForm()
   }
 
   componentDidMount () {
@@ -72,7 +71,7 @@ export class DefaultPage extends Component {
               </Grid>
               <Grid item xs={12} className="article-default-page-search"></Grid>
               <Grid item xs={12} className="article-default-page-table">
-                <ArticleTable onEditArticle={this.handleSetDataAndShowForm}></ArticleTable>
+                <ArticleTable onEditArticle={(row) => this.handleSetDataAndShowForm(row)}></ArticleTable>
               </Grid>
             </Grid>
           </Grid>

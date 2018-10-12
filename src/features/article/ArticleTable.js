@@ -19,6 +19,7 @@ export class ArticleTable extends Component {
       rowsPerPage: 10
     }
     this.handleEdit = this.handleEdit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleChangePage = (e, newPage) => {
@@ -35,6 +36,11 @@ export class ArticleTable extends Component {
 
   handleEdit(row) {
     console.log('row', row)
+    this.props.onEditArticle(row)
+  }
+
+  handleDelete(row) {
+    console.log('delete:', row)
   }
 
   handleSetStatus(row) {
@@ -65,8 +71,8 @@ export class ArticleTable extends Component {
                       <TableCell numeric>{row.title}</TableCell>
                       <TableCell numeric>{row.status}</TableCell>
                       <TableCell numeric>
-                        <Button variant="text" onClick={this.handleEdit(row)}>编辑</Button>
-                        <Button variant="text" color="secondary">删除</Button>
+                        <Button variant="text" onClick={() => this.handleEdit(row)}>编辑</Button>
+                        <Button variant="text" onClick={() => this.handleDelete(row)} color="secondary">删除</Button>
                       </TableCell>
                     </TableRow>
                   )
