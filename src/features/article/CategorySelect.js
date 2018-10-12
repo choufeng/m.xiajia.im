@@ -62,13 +62,13 @@ export class CategorySelect extends Component {
     })
   }
 
-  componentWillReceiveProps() {
-    this.setState((prveState, props) => {
-      return {
-        select: R.reduce((a, v) => R.append(v.id, a), [], props.selectValue)
-      }
-    })
-  }
+  // componentWillReceiveProps() {
+  //   this.setState((prveState, props) => {
+  //     return {
+  //       select: R.reduce((a, v) => R.append(v.id, a), [], props.selectValue)
+  //     }
+  //   })
+  // }
 
   handleChangeValue(e) {
     this.setState({
@@ -79,8 +79,9 @@ export class CategorySelect extends Component {
 
   getSelectedNameById(id) {
     const categoryList = this.state.list
+    console.log('categoryList is', id, categoryList)
     const item = R.find(R.propEq('id', id))(categoryList)
-    return item.name
+    return R.isNil(item) ? '已删除分类' : item.name
   }
 
   render() {

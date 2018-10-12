@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-import { Grid, TextField, Paper, Button } from '@material-ui/core';
+import { Grid, TextField, Paper, Button, InputLabel } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { EditorForm, CategorySelect } from './';
 import * as R from 'ramda';
@@ -74,7 +74,9 @@ export class ArticleForm extends Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    return R.not(R.equals(nextProps.data.id, this.props.data.id))
+    console.log('测试?', nextProps.data, this.state.modal)
+    // return R.not(R.equals(nextProps.data.id, this.state.modal.id))
+    return true
   }
 
   componentWillReceiveProps (nextProp) {
@@ -97,6 +99,7 @@ export class ArticleForm extends Component {
     // console.log('verifyForm', resul)
     // this.verifyForm(key, value)
     // 设定
+    console.log('is', key, value)
     this.setState({
       modal: R.assoc(key, value, this.state.modal)
     })
@@ -183,20 +186,22 @@ export class ArticleForm extends Component {
             <h3>内容管理{`{${R.isNil(modal.id) ? 'New' : modal.id}}`}</h3>
           </Grid>
           <Grid item xs={12}>
+            <InputLabel className={classes.textField}>文章标题</InputLabel>
             <TextField
               error={verify.title.status}
-              label="文章标题"
               placeholder="不大于50个字，必填"
               className={classes.textField}
               value={modal.title}
+              margin="dense"
               onChange={e => this.handleChangeValue('title', e.target.value)}
             ></TextField>
           </Grid>
           <Grid item xs={12}>
+            <InputLabel className={classes.textField}>链接地址</InputLabel>
             <TextField
-              label="链接地址"
               className={classes.textField}
               value={modal.link}
+              margin="dense"
               onChange={e => this.handleChangeValue('link', e.target.value)}
             ></TextField>
           </Grid>

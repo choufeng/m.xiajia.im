@@ -18,38 +18,58 @@ export class DefaultPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: {
-        id: null,
-        title: '',
-        link: '',
-        content: '',
-        status: 0
-      },
+      modal: {},
       showForm: false
     }
     this.handleCloseForm = this.handleCloseForm.bind(this)
     this.handleOpenForm = this.handleOpenForm.bind(this)
     this.handleSetDataAndShowForm = this.handleSetDataAndShowForm.bind(this)
+    this.handleCreateNewArticleForm = this.handleCreateNewArticleForm.bind(this)
   }
 
   handleOpenForm () {
-    this.setState({
-      showForm: true
+    return new Promise(resolve => {
+      this.setState({
+        showForm: true
+      })
+      resolve(true)
     })
   }
 
   handleCloseForm() {
-    this.setState({
-      showForm: false
+    return new Promise(resolve => {
+      this.setState({
+        showForm: false
+      })
+      resolve(true)
     })
   }
 
-  handleSetDataAndShowForm(data) {
-    this.handleCloseForm()
+  initModal() {
     this.setState({
-      modal: data
+      modal: {
+        id: null,
+        title: '',
+        link: '',
+        content: '',
+        status: 0,
+        categorys: []
+      }
     })
+  }
+
+  handleCreateNewArticleForm() {
+    this.initModal()
     this.handleOpenForm()
+  }
+
+  handleSetDataAndShowForm(data) {
+    this.handleCloseForm().then(() => {
+      this.setState({
+        modal: data
+      })
+      this.handleOpenForm()
+    })
   }
 
   componentDidMount () {
@@ -67,7 +87,7 @@ export class DefaultPage extends Component {
           <Grid item xs={5} className="article-default-page-left">
             <Grid container>
               <Grid item xs={12} className="article-default-page-add">
-                <Button variant="contained" color={"primary"} onClick={this.handleOpenForm} >添加新文章</Button>
+                <Button variant="contained" color={"primary"} onClick={this.handleCreateNewArticleForm} >添加新文章</Button>
               </Grid>
               <Grid item xs={12} className="article-default-page-search"></Grid>
               <Grid item xs={12} className="article-default-page-table">
