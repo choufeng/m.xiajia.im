@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.13"></a>
+## [0.3.13](https://github.com/choufeng/m.xiajia.im/compare/v0.3.12...v0.3.13) (2018-10-12)
+
+
+
 <a name="0.3.12"></a>
 ## [0.3.12](https://github.com/choufeng/m.xiajia.im/compare/v0.3.11...v0.3.12) (2018-10-10)
 
