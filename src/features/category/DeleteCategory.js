@@ -6,7 +6,7 @@ import * as actions from './redux/actions';
 import * as commonActions from '../common/redux/actions';
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core';
 import { equals } from 'ramda';
-import { DELETE_SUCCESS, SUCCESS, FAILURE, CANNOT_DELETE } from '../../common/consts';
+import { DELETE_SUCCESS, SUCCESS, CANNOT_DELETE } from '../../common/consts';
 
 export class DeleteCategory extends Component {
   static propTypes = {

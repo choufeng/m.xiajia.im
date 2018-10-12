@@ -3,3 +3,4 @@ export { fetchGetArticleList, dismissFetchGetArticleListError } from './fetchGet
 export { fetchGetArticleCount, dismissFetchGetArticleCountError } from './fetchGetArticleCount';
 export { setArticleListPage } from './setArticleListPage';
 export { setArticleListLimit } from './setArticleListLimit';
+export { fetchDeleteArticle, dismissFetchDeleteArticleError } from './fetchDeleteArticle';

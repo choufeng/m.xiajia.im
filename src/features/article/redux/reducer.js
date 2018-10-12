@@ -12,6 +12,7 @@ import { reducer as fetchGetArticleListReducer } from './fetchGetArticleList';
 import { reducer as fetchGetArticleCountReducer } from './fetchGetArticleCount';
 import { reducer as setArticleListPageReducer } from './setArticleListPage';
 import { reducer as setArticleListLimitReducer } from './setArticleListLimit';
+import { reducer as fetchDeleteArticleReducer } from './fetchDeleteArticle';
 
 const reducers = [
   fetchSaveArticleReducer,
@@ -19,6 +20,7 @@ const reducers = [
   fetchGetArticleCountReducer,
   setArticleListPageReducer,
   setArticleListLimitReducer,
+  fetchDeleteArticleReducer,
 ];
 
 export default function reducer(state = initialState, action) {

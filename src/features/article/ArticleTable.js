@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-import { Table, TableHead, TableCell, Paper, TableBody, TableRow, Button, TablePagination, Checkbox } from '@material-ui/core';
+import { Table, TableHead, TableCell, Paper, TableBody, TableRow, Button, TablePagination, Grid } from '@material-ui/core';
 import { map } from 'ramda';
+import { DeleteArticle } from './';
 
 export class ArticleTable extends Component {
   static propTypes = {
@@ -18,8 +19,6 @@ export class ArticleTable extends Component {
       page: 0,
       rowsPerPage: 10
     }
-    this.handleEdit = this.handleEdit.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleChangePage = (e, newPage) => {
@@ -32,15 +31,6 @@ export class ArticleTable extends Component {
     this.setState({rowsPerPage: event.target.value})
     this.props.actions.setArticleListLimit(event.target.value)
     this.props.actions.fetchGetArticleList()
-  }
-
-  handleEdit(row) {
-    console.log('row', row)
-    this.props.onEditArticle(row)
-  }
-
-  handleDelete(row) {
-    console.log('delete:', row)
   }
 
   handleSetStatus(row) {
@@ -71,8 +61,14 @@ export class ArticleTable extends Component {
                       <TableCell numeric>{row.title}</TableCell>
                       <TableCell numeric>{row.status}</TableCell>
                       <TableCell numeric>
-                        <Button variant="text" onClick={() => this.handleEdit(row)}>编辑</Button>
-                        <Button variant="text" onClick={() => this.handleDelete(row)} color="secondary">删除</Button>
+                        <Grid container>
+                          <Grid item xs={6}>
+                            <Button variant="text" onClick={() => this.props.onEditArticle(row)}>编辑</Button>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <DeleteArticle row={row}></DeleteArticle>
+                          </Grid>
+                        </Grid>
                       </TableCell>
                     </TableRow>
                   )

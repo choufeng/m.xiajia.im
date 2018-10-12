@@ -16,6 +16,8 @@ const initialState = {
   articleCount: 0,
   articleListPage: 0,
   articleListLimit: 10,
+  fetchDeleteArticlePending: false,
+  fetchDeleteArticleError: null,
 };
 
 export default initialState;

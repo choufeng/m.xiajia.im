@@ -7,7 +7,6 @@ import * as commonActions from '../common/redux/actions';
 import { TextField, Grid, Button, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { last, init, map, isEmpty, difference, not } from 'ramda';
-import * as R from 'ramda';
 import { SUCCESS, SAVE_SUCCESS } from '../../common/consts';
 
 const styles = theme => ({

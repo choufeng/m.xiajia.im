@@ -7,7 +7,6 @@ import { Grid, TextField, Paper, Button, InputLabel } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { EditorForm, CategorySelect } from './';
 import * as R from 'ramda';
-import verifyForm from '../../common/verifyForm';
 import * as commonActions from '../common/redux/actions';
 import { ADD_SUCCESS, SUCCESS, FAILURE } from '../../common/consts';
 import getErrorMessage from '../../common/getErrorMessage';
